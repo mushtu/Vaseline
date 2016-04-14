@@ -13,5 +13,5 @@ import java.util.List;
 public interface VaselineHibernateConfigurer extends VaselineConfigurer{
 
     //void configureSessionFactory(SessionFactoryBean sessionFactory);
-    void configureScannedPackages(List<String> packages);
+    void configurePackagesToScan(List<String> packages);
 }

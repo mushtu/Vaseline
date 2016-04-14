@@ -18,8 +18,8 @@ public class VaselineHibernateConfigurerDelegate implements VaselineHibernateCon
     }
 
     @Override
-    public void configureScannedPackages(List<String> packages) {
+    public void configurePackagesToScan(List<String> packages) {
         for(VaselineHibernateConfigurer configurer:delegates)
-            configurer.configureScannedPackages(packages);
+            configurer.configurePackagesToScan(packages);
     }
 }

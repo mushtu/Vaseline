@@ -5,6 +5,7 @@ import ir.amv.os.vaseline.base.architecture.impl.hibernate.server.layers.ro.dao.
 import ir.amv.os.vaseline.base.caching.config.VaselineCachingConfig;
 import ir.amv.os.vaseline.base.jdbc.config.VaselineJdbcConfig;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -21,6 +22,9 @@ import org.springframework.transaction.support.TransactionTemplate;
 
 import javax.sql.DataSource;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Properties;
 
 /**
@@ -33,10 +37,22 @@ import java.util.Properties;
         VaselineJdbcConfig.class,
         VaselineCachingConfig.class
 })
-public class VaselineHibernateConfig {
+public class VaselineHibernateConfig implements InitializingBean {
+
+    @Autowired(required = false)
+    List<VaselineHibernateConfigurer> configurers = Collections.emptyList();
 
     @Autowired
     Environment environment;
+
+    private VaselineHibernateConfigurerDelegate configurerDelegate;
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        configurerDelegate = new VaselineHibernateConfigurerDelegate(configurers);
+    }
+
+
 
     @Bean
     public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
@@ -45,15 +61,21 @@ public class VaselineHibernateConfig {
 
     @Bean
     public SessionFactory sessionFactory(DataSource dataSource) {
+
         LocalSessionFactoryBean em = new LocalSessionFactoryBean();
         em.setDataSource(dataSource);
-        em.setPackagesToScan("ir.amv");
         em.setHibernateProperties(additionalProperties());
+        List<String> packages = new ArrayList<String>();
+        configurerDelegate.configurePackagesToScan(packages);
+        packages.add("ir.amv"); //todo remove hard coded package name!!
+        String[] arr = new String[packages.size()];
+        em.setPackagesToScan(packages.toArray(arr));
         try {
             em.afterPropertiesSet();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         return em.getObject();
     }
 
@@ -108,4 +130,6 @@ public class VaselineHibernateConfig {
     public IPagingResultCreator pagingResultCreator() {
         return new DefaultPagingResultCreator();
     }
+
+
 }
