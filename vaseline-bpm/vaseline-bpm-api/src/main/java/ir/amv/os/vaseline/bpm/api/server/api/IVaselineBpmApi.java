@@ -11,6 +11,7 @@ import ir.amv.os.vaseline.bpm.api.server.model.gotoform.GoToTaskFormRespServer;
 import ir.amv.os.vaseline.bpm.api.server.model.startproc.StartProcessReqServer;
 import ir.amv.os.vaseline.bpm.api.server.model.startproc.StartProcessResultServer;
 import org.activiti.engine.task.Task;
+import org.springframework.core.io.Resource;
 
 import java.io.InputStream;
 import java.io.Serializable;
@@ -43,5 +44,8 @@ public interface IVaselineBpmApi
 
     Long countCandidateUserTaskList() throws BaseVaselineServerException	;
     // Cartable End
+
+    void deploy(String name, String def);
+    void deploy(String resourceName,InputStream inputStream);
 
 }

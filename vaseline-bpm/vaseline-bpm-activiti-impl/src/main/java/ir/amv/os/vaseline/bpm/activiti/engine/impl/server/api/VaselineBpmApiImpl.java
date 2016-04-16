@@ -26,6 +26,7 @@ import org.activiti.engine.task.Task;
 import org.activiti.engine.task.TaskQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -271,6 +272,18 @@ public class VaselineBpmApiImpl
         TaskQuery taskQuery = candidateUserTaskQuery();
         long count = taskQuery.count();
         return count;
+    }
+
+    @Override
+    @Transactional
+    public void deploy(String name, String def) {
+        repositoryService.createDeployment().addString(name,def).deploy();
+    }
+
+    @Override
+    @Transactional
+    public void deploy(String resourceName,InputStream inputStream) {
+        repositoryService.createDeployment().addInputStream(resourceName,inputStream).deploy();
     }
 
     @Autowired
