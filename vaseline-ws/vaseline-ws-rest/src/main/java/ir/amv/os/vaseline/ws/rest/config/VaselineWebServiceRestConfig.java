@@ -12,6 +12,8 @@ import ir.amv.os.vaseline.ws.rest.server.base.parent.IBaseRestService;
 import org.apache.cxf.endpoint.Server;
 import org.apache.cxf.jaxrs.JAXRSServerFactoryBean;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -23,10 +25,7 @@ import org.springframework.context.annotation.Import;
 import javax.ws.rs.ext.MessageBodyReader;
 import javax.ws.rs.ext.MessageBodyWriter;
 import javax.ws.rs.ext.RuntimeDelegate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by AMV on 2/13/2016.
@@ -36,10 +35,15 @@ import java.util.Map;
         VaselineWebServiceCommonConfig.class,
         VaselineJsonConfig.class
 })
-public class VaselineWebServiceRestConfig implements ApplicationContextAware {
+public class VaselineWebServiceRestConfig implements ApplicationContextAware,InitializingBean {
 
     private ApplicationContext applicationContext;
     private ArrayList<Object> restBeansList;
+
+    @Autowired(required = false)
+    List<VaselineRestConfigurer> configurers = Collections.emptyList();
+
+    private VaselineRestConfigurerDelegate configurerDelegate;
 
     @Bean
     public GsonMessageBodyHandler gsonMessageBodyHandler() {
@@ -54,6 +58,12 @@ public class VaselineWebServiceRestConfig implements ApplicationContextAware {
     @Bean
     public MessageBodyReader<Object> jsonReader(GsonMessageBodyHandler handler) {
         return handler;
+    }
+
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        configurerDelegate = new VaselineRestConfigurerDelegate(configurers);
     }
 
     @Override
@@ -99,9 +109,21 @@ public class VaselineWebServiceRestConfig implements ApplicationContextAware {
             restBeansList.add(restService);
         }
         factory.setServiceBeans(restBeansList);
-        factory.setAddress("/rest");
-        factory.setProviders(Arrays.<Object> asList(bodyWriter, exceptionMapper));
+        VaselineRestConfiguration config = vaselineRestConfiguration();
+        List<Object> providers = config.getProviders();
+        providers.add(bodyWriter);
+        providers.add(exceptionMapper);
+        factory.setProviders(providers);
         return factory.create();
+    }
+
+    @Bean
+    public VaselineRestConfiguration vaselineRestConfiguration()
+    {
+        VaselineRestConfiguration config = new VaselineRestConfiguration();
+        config.setBaseAddress("/rest");
+        configurerDelegate.configureRestService(config);
+        return config;
     }
 
     @Bean
