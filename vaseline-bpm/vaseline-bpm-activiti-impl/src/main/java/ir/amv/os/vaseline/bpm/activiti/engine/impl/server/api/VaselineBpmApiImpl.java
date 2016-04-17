@@ -48,8 +48,14 @@ public class VaselineBpmApiImpl
     private IAuthenticationApi authenticationAPI;
     private List<IBaseTaskBeanResolver> taskBeanResolvers;
 
-    protected Map<String, Object> getVariables(String processInstanceId) {
+    public Map<String, Object> getProcessVariables(String processInstanceId) {
         return runtimeService.getVariables(processInstanceId);
+    }
+
+    @Override
+    public Map<String, Object> getProcessVariablesByTaskId(String taskId) {
+        Task taskById = getTaskById(taskId);
+        return getProcessVariables(taskById.getProcessInstanceId());
     }
 
     @Override
@@ -284,6 +290,11 @@ public class VaselineBpmApiImpl
     @Transactional
     public void deploy(String resourceName,InputStream inputStream) {
         repositoryService.createDeployment().addInputStream(resourceName,inputStream).deploy();
+    }
+
+    @Override
+    public List<String> getActiveActivityIds(String executionId) {
+        return runtimeService.getActiveActivityIds(executionId);
     }
 
     @Autowired

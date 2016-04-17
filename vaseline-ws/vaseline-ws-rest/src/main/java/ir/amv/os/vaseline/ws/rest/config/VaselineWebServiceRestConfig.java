@@ -114,6 +114,7 @@ public class VaselineWebServiceRestConfig implements ApplicationContextAware,Ini
         providers.add(bodyWriter);
         providers.add(exceptionMapper);
         factory.setProviders(providers);
+        factory.setAddress(config.getBaseAddress());
         return factory.create();
     }
 

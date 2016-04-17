@@ -2,15 +2,17 @@ package ir.amv.os.vaseline.bpm.api.shared.model.compltask;
 
 import ir.amv.os.vaseline.bpm.api.shared.model.BaseBpmRequestDto;
 
+import java.util.HashMap;
 import java.util.Map;
 
-public class CompleteTaskRequestDto extends BaseBpmRequestDto {
+public abstract class AbstractCompleteTaskRequestDto extends BaseBpmRequestDto {
 
 	private static final long serialVersionUID = 1L;
 	
 	private String description;
 	private String taskId;
-	private Map<String, Object> variables;
+	protected Map<String,Object> variablesMap = new HashMap<String, Object>();
+
 
 	public String getTaskId() {
 		return taskId;
@@ -28,11 +30,10 @@ public class CompleteTaskRequestDto extends BaseBpmRequestDto {
 		this.description = description;
 	}
 
-	public Map<String, Object> getVariables() {
-		return variables;
-	}
+	public abstract Map<String, Object> getVariables();
 
-	public void setVariables(Map<String, Object> variables) {
-		this.variables = variables;
+	public void addVariable(String key, Object object)
+	{
+		variablesMap.put(key,object);
 	}
 }

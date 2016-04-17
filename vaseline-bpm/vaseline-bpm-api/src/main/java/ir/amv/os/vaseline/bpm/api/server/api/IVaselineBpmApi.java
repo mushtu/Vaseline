@@ -16,6 +16,7 @@ import org.springframework.core.io.Resource;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by AMV on 3/2/2016.
@@ -47,5 +48,11 @@ public interface IVaselineBpmApi
 
     void deploy(String name, String def);
     void deploy(String resourceName,InputStream inputStream);
+
+    List<String> getActiveActivityIds(String executionId);
+
+    Map<String, Object> getProcessVariables(String processInstanceId);
+
+    Map<String,Object> getProcessVariablesByTaskId(String taskId);
 
 }
