@@ -3,15 +3,18 @@ package ir.amv.os.vaseline.base.json.config;
 import com.google.gson.*;
 import ir.amv.os.vaseline.base.core.config.VaselineCoreConfig;
 import ir.amv.os.vaseline.base.core.shared.util.reflection.ReflectionUtil;
+import ir.amv.os.vaseline.base.json.server.GraphAdapterBuilder;
 import ir.amv.os.vaseline.base.json.server.annot.ExcludeFromJson;
 import ir.amv.os.vaseline.base.json.server.polymorphysm.GsonPolymorphysmSerializerAndDeserializer;
 import ir.amv.os.vaseline.base.core.server.polymorphysm.IVaselinePolymorphysmClassHolder;
 import ir.amv.os.vaseline.base.core.server.polymorphysm.impl.VaselinePolymorphysmClassHolderImpl;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -21,7 +24,18 @@ import java.util.Map;
 @Configuration
 @Import(VaselineCoreConfig.class)
 @ComponentScan("ir.amv.os.vaseline.base.json.server")
-public class VaselineJsonConfig {
+public class VaselineJsonConfig implements InitializingBean{
+
+    @Autowired(required = false)
+    List<VaselineJsonConfigurer> configurers = Collections.emptyList();
+
+    private VaselineJsonConfigurerDelegate configurerDelegate;
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        configurerDelegate = new VaselineJsonConfigurerDelegate(configurers);
+    }
+
 
     @Bean
     @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
@@ -88,6 +102,10 @@ public class VaselineJsonConfig {
                 return false;
             }
         });
+
+        GraphAdapterBuilder graphAdapterBuilder = new GraphAdapterBuilder();
+        configurerDelegate.configureGraphAdapterBuilder(graphAdapterBuilder).registerOn(gsonBuilder);
+
         // didn't work, stackoverflow!
         // GsonLazySerializerAndDeserializer gsonLazySerializer =
         // gsonLazySerializer();
@@ -99,6 +117,9 @@ public class VaselineJsonConfig {
         // gsonLazySerializer);
         return gsonBuilder;
     }
+
+
+
 
     @Bean(name = "vaselinePolymorphysmSerializerAndDeserializer")
     public GsonPolymorphysmSerializerAndDeserializer childSerializerAndDeserializer() {

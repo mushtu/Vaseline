@@ -55,4 +55,6 @@ public interface IVaselineBpmApi
 
     Map<String,Object> getProcessVariablesByTaskId(String taskId);
 
+    boolean isProcessExist(String processId);
+
 }

@@ -59,6 +59,11 @@ public class VaselineBpmApiImpl
     }
 
     @Override
+    public boolean isProcessExist(String processId) {
+        return runtimeService.createExecutionQuery().executionId(processId).list().size() != 0;
+    }
+
+    @Override
     public void setVariable(String taskId, String variableName, Serializable value) throws BaseVaselineServerException {
         Task taskById = getTaskById(taskId);
         runtimeService.setVariable(taskById.getExecutionId(), variableName, value);
@@ -202,13 +207,13 @@ public class VaselineBpmApiImpl
         variables.putAll(reqVariables);
         req.setVariables(variables);
 
-        ITaskBean<?, CompleteTaskRequestServer> bean = getBean(task);
+        //ITaskBean<?, CompleteTaskRequestServer> bean = getBean(task);
         try {
-            Map<String, Object> complete = bean.complete(req);
-            taskService.complete(req.getTaskId(), complete);
+            //Map<String, Object> complete = bean.complete(req);
+            taskService.complete(req.getTaskId(), variables);
             CompleteTaskResponseServer result = new CompleteTaskResponseServer();
             return result;
-        } catch (BaseVaselineServerException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
