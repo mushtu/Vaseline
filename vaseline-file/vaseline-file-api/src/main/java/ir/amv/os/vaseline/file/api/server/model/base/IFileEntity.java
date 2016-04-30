@@ -1,13 +1,12 @@
 package ir.amv.os.vaseline.file.api.server.model.base;
 
-import ir.amv.os.vaseline.base.core.server.base.ent.IBaseEntity;
-import ir.amv.os.vaseline.base.core.server.base.ent.hascreatedate.IBaseHasCreateDateEntity;
-import ir.amv.os.vaseline.base.core.server.base.ent.hasmodifydate.IBaseHasModifyDateEntity;
+import ir.amv.os.vaseline.base.core.server.base.ent.hascreatedate.HasCreateDateEntity;
+import ir.amv.os.vaseline.base.core.server.base.ent.hasmodifydate.HasModifyDateEntity;
 
 /**
  * Created by AMV on 2/8/2016.
  */
-public interface IFileEntity extends IBaseHasCreateDateEntity<Long>, IBaseHasModifyDateEntity<Long> {
+public interface IFileEntity extends HasCreateDateEntity<Long>, HasModifyDateEntity<Long> {
 
     String getFileName();
 

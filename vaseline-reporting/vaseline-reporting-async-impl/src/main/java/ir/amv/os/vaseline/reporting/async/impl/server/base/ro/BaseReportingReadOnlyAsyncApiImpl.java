@@ -1,8 +1,8 @@
 package ir.amv.os.vaseline.reporting.async.impl.server.base.ro;
 
-import ir.amv.os.vaseline.base.architecture.impl.server.layers.base.ro.api.BaseReadOnlyApiImpl;
-import ir.amv.os.vaseline.base.architecture.server.layers.base.ro.dao.IBaseReadOnlyDao;
-import ir.amv.os.vaseline.base.core.server.base.ent.IBaseEntity;
+import ir.amv.os.vaseline.base.architecture.impl.server.layers.base.ro.dai.BaseReadOnlyDai;
+import ir.amv.os.vaseline.base.architecture.server.layers.base.ro.dao.ReadOnlyDao;
+import ir.amv.os.vaseline.base.core.server.base.ent.Identifiable;
 import ir.amv.os.vaseline.base.core.server.base.exc.BaseVaselineServerException;
 import ir.amv.os.vaseline.base.core.shared.base.dto.base.IBaseDto;
 import ir.amv.os.vaseline.base.core.shared.base.dto.paging.PagingDto;
@@ -22,8 +22,8 @@ import java.util.List;
 /**
  * Created by AMV on 2/13/2016.
  */
-public class BaseReportingReadOnlyAsyncApiImpl<E extends IBaseEntity<Id>, D extends IBaseDto<Id>, Id extends Serializable, DAO extends IBaseReadOnlyDao<E, D, Id>>
-        extends BaseReadOnlyApiImpl<E, D, Id, DAO>
+public class BaseReportingReadOnlyAsyncApiImpl<E extends Identifiable<Id>, D extends IBaseDto<Id>, Id extends Serializable, DAO extends ReadOnlyDao<E, D, Id>>
+        extends BaseReadOnlyDai<E, D, Id, DAO>
         implements IBaseReportingReadOnlyAsyncApi<E, D, Id> {
 
     private ICreateReportApi createReportApi;

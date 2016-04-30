@@ -1,6 +1,6 @@
 package ir.amv.os.vaseline.file.api.impl.server.model.base;
 
-import ir.amv.os.vaseline.base.architecture.impl.server.layers.multidao.crud.api.BaseMultiDaoCrudApiImpl;
+import ir.amv.os.vaseline.base.architecture.impl.server.layers.multidao.crud.dai.BaseMultiDaoCrudDai;
 import ir.amv.os.vaseline.base.core.server.base.exc.BaseVaselineServerException;
 import ir.amv.os.vaseline.file.api.server.model.base.IFileApi;
 import ir.amv.os.vaseline.file.api.server.model.base.IFileDao;
@@ -21,7 +21,7 @@ import java.util.List;
  */
 @Component
 public class FileApiImpl
-        extends BaseMultiDaoCrudApiImpl<IFileEntity, IFileDto, Long, IFileDao>
+        extends BaseMultiDaoCrudDai<IFileEntity, IFileDto, Long, IFileDao>
         implements IFileApi {
 
     private List<IFileDaoRegisterer> daoRegisterers;

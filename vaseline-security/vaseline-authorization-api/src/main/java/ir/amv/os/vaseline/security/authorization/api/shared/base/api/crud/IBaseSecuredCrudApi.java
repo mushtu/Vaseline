@@ -1,7 +1,7 @@
 package ir.amv.os.vaseline.security.authorization.api.shared.base.api.crud;
 
-import ir.amv.os.vaseline.base.architecture.server.layers.base.crud.api.IBaseCrudApi;
-import ir.amv.os.vaseline.base.core.server.base.ent.IBaseEntity;
+import ir.amv.os.vaseline.base.architecture.server.layers.base.crud.dai.CrudDai;
+import ir.amv.os.vaseline.base.core.server.base.ent.Identifiable;
 import ir.amv.os.vaseline.base.core.server.base.exc.BaseVaselineServerException;
 import ir.amv.os.vaseline.base.core.shared.base.dto.base.IBaseDto;
 import ir.amv.os.vaseline.security.authorization.api.shared.base.api.ro.IBaseSecuredReadOnlyApi;
@@ -12,8 +12,8 @@ import java.util.List;
 /**
  * Created by AMV on 2/25/2016.
  */
-public interface IBaseSecuredCrudApi<E extends IBaseEntity<Id>, D extends IBaseDto<Id>, Id extends Serializable>
-        extends IBaseCrudApi<E, D, Id>, IBaseSecuredReadOnlyApi<E, D, Id> {
+public interface IBaseSecuredCrudApi<E extends Identifiable<Id>, D extends IBaseDto<Id>, Id extends Serializable>
+        extends CrudDai<E, D, Id>, IBaseSecuredReadOnlyApi<E, D, Id> {
 
     String BASE_OP_CREATE = "create";
     String BASE_OP_UPDATE = "update";

@@ -1,6 +1,6 @@
 package ir.amv.os.vaseline.bpm.activiti.engine.impl.server.api;
 
-import ir.amv.os.vaseline.base.architecture.impl.server.layers.parent.api.BaseApiImpl;
+import ir.amv.os.vaseline.base.architecture.impl.server.layers.parent.dai.BaseDai;
 import ir.amv.os.vaseline.base.core.server.base.exc.BaseVaselineServerException;
 import ir.amv.os.vaseline.base.core.shared.base.dto.paging.PagingDto;
 import ir.amv.os.vaseline.bpm.activiti.engine.impl.server.api.taskbeanresolver.IBaseTaskBeanResolver;
@@ -25,8 +25,6 @@ import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
 import org.activiti.engine.task.TaskQuery;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,7 +37,7 @@ import java.util.*;
  */
 @Component
 public class VaselineBpmApiImpl
-        extends BaseApiImpl
+        extends BaseDai
         implements IVaselineBpmApi {
 
     private RuntimeService runtimeService;

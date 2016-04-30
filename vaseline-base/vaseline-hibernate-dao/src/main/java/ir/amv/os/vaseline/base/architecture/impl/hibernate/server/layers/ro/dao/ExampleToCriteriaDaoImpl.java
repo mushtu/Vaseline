@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import ir.amv.os.vaseline.base.architecture.impl.server.layers.parent.dao.BaseDaoImpl;
+import ir.amv.os.vaseline.base.architecture.impl.server.layers.parent.dao.BaseDao;
 import ir.amv.os.vaseline.base.core.shared.base.dto.base.IBaseDto;
 import ir.amv.os.vaseline.base.core.shared.util.date.DateUtil;
 import ir.amv.os.vaseline.base.core.shared.util.ds.KeyStartsWithMap;
@@ -26,7 +26,7 @@ import org.hibernate.criterion.Restrictions;
 import org.hibernate.criterion.SimpleExpression;
 
 public class ExampleToCriteriaDaoImpl<D>
-		extends BaseDaoImpl {
+		extends BaseDao {
 
 	public ExampleToCriteriaDaoImpl() {
 	}

@@ -1,6 +1,6 @@
 package ir.amv.os.vaseline.security.authentication.spring.impl.server.model.user;
 
-import ir.amv.os.vaseline.base.architecture.impl.hibernate.server.ent.BaseEntityImpl;
+import ir.amv.os.vaseline.base.architecture.impl.hibernate.server.ent.BaseJpaEntity;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -15,7 +15,7 @@ import java.util.Date;
 @Cacheable
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Entity
-public class BaseUserEntity extends BaseEntityImpl<Long> {
+public class BaseUserEntity extends BaseJpaEntity<Long> {
 
     private String username;
     private String password;

@@ -1,7 +1,7 @@
 package ir.amv.os.vaseline.security.authorization.api.shared.base.api.ro;
 
-import ir.amv.os.vaseline.base.architecture.server.layers.base.ro.api.IBaseReadOnlyApi;
-import ir.amv.os.vaseline.base.core.server.base.ent.IBaseEntity;
+import ir.amv.os.vaseline.base.architecture.server.layers.base.ro.dai.ReadOnlyDai;
+import ir.amv.os.vaseline.base.core.server.base.ent.Identifiable;
 import ir.amv.os.vaseline.base.core.server.base.exc.BaseVaselineServerException;
 import ir.amv.os.vaseline.base.core.shared.base.dto.base.IBaseDto;
 import ir.amv.os.vaseline.base.core.shared.base.dto.paging.PagingDto;
@@ -12,8 +12,8 @@ import java.util.List;
 /**
  * Created by AMV on 2/25/2016.
  */
-public interface IBaseSecuredReadOnlyApi<E extends IBaseEntity<Id>, D extends IBaseDto<Id>, Id extends Serializable>
-        extends IBaseReadOnlyApi<E, D, Id> {
+public interface IBaseSecuredReadOnlyApi<E extends Identifiable<Id>, D extends IBaseDto<Id>, Id extends Serializable>
+        extends ReadOnlyDai<E, D, Id> {
 
     String BASE_OP_READ = "read";
 

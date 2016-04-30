@@ -1,6 +1,6 @@
 package ir.amv.os.vaseline.file.db.impl.server.model.blob;
 
-import ir.amv.os.vaseline.base.architecture.impl.hibernate.server.ent.BaseEntityImpl;
+import ir.amv.os.vaseline.base.architecture.impl.hibernate.server.ent.BaseJpaEntity;
 import ir.amv.os.vaseline.file.api.server.model.base.IFileEntity;
 
 import javax.persistence.*;
@@ -12,7 +12,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name =  "FILE_BLOB")
-public class FileBlobEntity extends BaseEntityImpl<Long> implements IFileEntity {
+public class FileBlobEntity extends BaseJpaEntity<Long> implements IFileEntity {
 
     private String fileName;
     private Long fileSize;

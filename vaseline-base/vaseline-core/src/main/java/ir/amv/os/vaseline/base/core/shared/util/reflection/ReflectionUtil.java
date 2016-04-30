@@ -1,6 +1,6 @@
 package ir.amv.os.vaseline.base.core.shared.util.reflection;
 
-import ir.amv.os.vaseline.base.core.server.base.ent.IBaseEntity;
+import ir.amv.os.vaseline.base.core.server.base.ent.Identifiable;
 
 import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
@@ -15,13 +15,13 @@ import java.util.*;
 
 public class ReflectionUtil {
 
-    public static void setNonDtoPropsToNull(IBaseEntity<?> ent, final Class<?> dtoClass) throws IntrospectionException {
+    public static void setNonDtoPropsToNull(Identifiable<?> ent, final Class<?> dtoClass) throws IntrospectionException {
         if (ent == null) {
             return;
         }
-        intercept(ent, IBaseEntity.class, new ReflectionInterceptor<IBaseEntity<?>>() {
+        intercept(ent, Identifiable.class, new ReflectionInterceptor<Identifiable<?>>() {
             @Override
-            public IBaseEntity<?> intercept(IBaseEntity<?> object, String propertyTreeName) {
+            public Identifiable<?> intercept(Identifiable<?> object, String propertyTreeName) {
                 if (getPropertyTypeByTreeName(dtoClass, propertyTreeName) != null) {
                     return object;
                 }

@@ -1,6 +1,6 @@
 package ir.amv.os.vaseline.reporting.core.impl.server;
 
-import ir.amv.os.vaseline.base.architecture.impl.server.layers.parent.api.BaseApiImpl;
+import ir.amv.os.vaseline.base.architecture.impl.server.layers.parent.dai.BaseDai;
 import ir.amv.os.vaseline.base.core.server.base.exc.BaseVaselineServerException;
 import ir.amv.os.vaseline.base.core.shared.util.date.DateUtil;
 import ir.amv.os.vaseline.reporting.api.server.datasource.BaseBeansDataSource;
@@ -41,7 +41,7 @@ import java.util.concurrent.Future;
  */
 @Component
 public class CreateReportApiImpl
-        extends BaseApiImpl
+        extends BaseDai
         implements ICreateReportApi, ServletContextAware {
 
     @Autowired

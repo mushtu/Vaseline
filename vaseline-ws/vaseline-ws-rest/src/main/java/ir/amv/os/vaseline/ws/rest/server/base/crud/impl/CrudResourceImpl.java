@@ -1,6 +1,6 @@
 package ir.amv.os.vaseline.ws.rest.server.base.crud.impl;
 
-import ir.amv.os.vaseline.base.architecture.server.layers.base.crud.service.IBaseCrudService;
+import ir.amv.os.vaseline.base.architecture.server.layers.base.crud.service.CrudService;
 import ir.amv.os.vaseline.base.core.shared.base.dto.base.IBaseDto;
 import ir.amv.os.vaseline.base.core.shared.base.exc.BaseVaselineClientException;
 import ir.amv.os.vaseline.ws.rest.server.base.crud.CrudResource;
@@ -11,7 +11,7 @@ import java.io.Serializable;
 /**
  * Created by AMV on 2/13/2016.
  */
-public class CrudResourceImpl<D extends IBaseDto<Id>, Id extends Serializable, S extends IBaseCrudService<D, Id>>
+public class CrudResourceImpl<D extends IBaseDto<Id>, Id extends Serializable, S extends CrudService<D, Id>>
         extends ReadOnlyResourceImpl<D, Id, S>
         implements CrudResource<D, Id> {
 

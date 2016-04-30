@@ -1,6 +1,6 @@
 package ir.amv.os.vaseline.security.authentication.spring.impl.server.api.impl;
 
-import ir.amv.os.vaseline.base.architecture.impl.server.layers.parent.api.BaseApiImpl;
+import ir.amv.os.vaseline.base.architecture.impl.server.layers.parent.dai.BaseDai;
 import ir.amv.os.vaseline.base.core.server.base.exc.BaseVaselineServerException;
 import ir.amv.os.vaseline.security.authentication.api.shared.api.IAuthenticationApi;
 import org.springframework.security.core.Authentication;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class AuthenticationApiImpl
-        extends BaseApiImpl
+        extends BaseDai
         implements IAuthenticationApi {
     @Override
     public String getCurrentUsername() throws BaseVaselineServerException {

@@ -1,6 +1,6 @@
 package ir.amv.os.vaseline.reporting.async.impl.server.base.parent;
 
-import ir.amv.os.vaseline.base.architecture.impl.server.layers.parent.api.BaseApiImpl;
+import ir.amv.os.vaseline.base.architecture.impl.server.layers.parent.dai.BaseDai;
 import ir.amv.os.vaseline.base.core.server.base.exc.BaseVaselineServerException;
 import ir.amv.os.vaseline.base.core.shared.base.dto.paging.PagingDto;
 import ir.amv.os.vaseline.base.core.shared.util.callback.IBaseCallback;
@@ -19,7 +19,7 @@ import java.util.List;
  * Created by AMV on 2/13/2016.
  */
 public class BaseReportingAsyncApiImpl<E>
-        extends BaseApiImpl
+        extends BaseDai
         implements IBaseReportingAsyncApi<E> {
 
     private ICreateReportApi createReportApi;

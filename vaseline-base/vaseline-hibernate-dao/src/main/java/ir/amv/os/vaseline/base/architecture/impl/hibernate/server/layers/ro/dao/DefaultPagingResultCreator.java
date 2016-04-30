@@ -1,6 +1,6 @@
 package ir.amv.os.vaseline.base.architecture.impl.hibernate.server.layers.ro.dao;
 
-import ir.amv.os.vaseline.base.core.server.base.ent.IBaseEntity;
+import ir.amv.os.vaseline.base.core.server.base.ent.Identifiable;
 import ir.amv.os.vaseline.base.core.shared.base.dto.paging.PagingDto;
 import ir.amv.os.vaseline.base.core.shared.util.callback.IBaseReturningCallback;
 import org.hibernate.Criteria;
@@ -14,7 +14,7 @@ import java.util.List;
 public class DefaultPagingResultCreator
         implements IPagingResultCreator {
     @Override
-    public <E extends IBaseEntity<?>> List<E> getPagingResult(BaseReadOnlyHibernateDaoImpl<E, ?, ?> dao, IBaseReturningCallback<DetachedCriteria> createCriteriaCallback, PagingDto pagingDto) {
+    public <E extends Identifiable<?>> List<E> getPagingResult(BaseReadOnlyHibernateDaoImpl<E, ?, ?> dao, IBaseReturningCallback<DetachedCriteria> createCriteriaCallback, PagingDto pagingDto) {
         DetachedCriteria detachedCriteria = createCriteriaCallback.execute();
         Criteria criteria = dao.getCriteriaFromDetachedCriteria(detachedCriteria);
         criteria = dao.paginateCriteria(criteria, pagingDto);

@@ -1,6 +1,6 @@
 package ir.amv.os.vaseline.file.db.impl.server.model.path;
 
-import ir.amv.os.vaseline.base.architecture.impl.hibernate.server.ent.BaseEntityImpl;
+import ir.amv.os.vaseline.base.architecture.impl.hibernate.server.ent.BaseJpaEntity;
 import ir.amv.os.vaseline.file.api.server.model.base.IFileEntity;
 
 import javax.persistence.Entity;
@@ -12,7 +12,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name =  "FILE_PATH_STORED")
-public class FilePathEntity extends BaseEntityImpl<Long> implements IFileEntity {
+public class FilePathEntity extends BaseJpaEntity<Long> implements IFileEntity {
 
     private String fileName;
     private Long fileSize;

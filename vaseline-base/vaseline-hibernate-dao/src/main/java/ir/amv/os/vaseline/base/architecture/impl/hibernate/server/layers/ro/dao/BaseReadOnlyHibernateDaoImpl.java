@@ -1,7 +1,7 @@
 package ir.amv.os.vaseline.base.architecture.impl.hibernate.server.layers.ro.dao;
 
-import ir.amv.os.vaseline.base.architecture.server.layers.base.ro.dao.IBaseReadOnlyDao;
-import ir.amv.os.vaseline.base.core.server.base.ent.IBaseEntity;
+import ir.amv.os.vaseline.base.architecture.server.layers.base.ro.dao.ReadOnlyDao;
+import ir.amv.os.vaseline.base.core.server.base.ent.Identifiable;
 import ir.amv.os.vaseline.base.core.shared.base.dto.base.IBaseDto;
 import ir.amv.os.vaseline.base.core.shared.base.dto.paging.PagingDto;
 import ir.amv.os.vaseline.base.core.shared.base.dto.sort.SortDto;
@@ -22,9 +22,9 @@ import java.util.List;
 /**
  * Created by AMV on 2/7/2016.
  */
-public class BaseReadOnlyHibernateDaoImpl<E extends IBaseEntity<Id>, D extends IBaseDto<Id>, Id extends Serializable>
+public class BaseReadOnlyHibernateDaoImpl<E extends Identifiable<Id>, D extends IBaseDto<Id>, Id extends Serializable>
         extends ExampleToCriteriaDaoImpl<D>
-        implements IBaseReadOnlyDao<E, D, Id> {
+        implements ReadOnlyDao<E, D, Id> {
 
     protected SessionFactory sessionFactory;
     private Class<E> entityClass;

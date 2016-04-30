@@ -1,9 +1,8 @@
 package ir.amv.os.vaseline.bpm.api.base.impl.server.base;
 
-import ir.amv.os.vaseline.base.architecture.impl.server.layers.base.crud.api.BaseCrudApiImpl;
-import ir.amv.os.vaseline.base.architecture.impl.server.layers.base.crud.api.BaseCrudApiImplHelper;
-import ir.amv.os.vaseline.base.architecture.server.layers.base.crud.dao.IBaseCrudDao;
-import ir.amv.os.vaseline.base.core.server.base.ent.IBaseEntity;
+import ir.amv.os.vaseline.base.architecture.impl.server.layers.base.crud.dai.BaseCrudDai;
+import ir.amv.os.vaseline.base.architecture.server.layers.base.crud.dao.CrudDao;
+import ir.amv.os.vaseline.base.core.server.base.ent.Identifiable;
 import ir.amv.os.vaseline.base.core.server.base.exc.BaseVaselineServerException;
 import ir.amv.os.vaseline.base.core.shared.base.dto.base.IBaseDto;
 import ir.amv.os.vaseline.bpm.api.server.api.IVaselineBpmApi;
@@ -15,8 +14,8 @@ import java.io.Serializable;
 /**
  * Created by AMV on 3/2/2016.
  */
-public class BaseBpmCrudApiImpl<E extends IBaseEntity<Id>, D extends IBaseDto<Id>, Id extends Serializable, DAO extends IBaseCrudDao<E, D, Id>>
-        extends BaseCrudApiImpl<E, D, Id, DAO>
+public class BaseBpmCrudApiImpl<E extends Identifiable<Id>, D extends IBaseDto<Id>, Id extends Serializable, DAO extends CrudDao<E, D, Id>>
+        extends BaseCrudDai<E, D, Id, DAO>
         implements IBaseBpmCrudApi<E, D, Id> {
 
     protected IVaselineBpmApi bpmApi;

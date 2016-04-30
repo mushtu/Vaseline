@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Import;
  * Created by AMV on 2/10/2016.
  */
 @Configuration
-@ComponentScan("ir.amv.os.vaseline.file.api.impl.server")
+@ComponentScan("ir.amv.os.vaseline.file.dai.impl.server")
 @Import(VaselineCoreConfig.class)
 public class VaselineFileConfig {
 }

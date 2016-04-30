@@ -1,7 +1,6 @@
 package ir.amv.os.vaseline.file.api.server.model.base;
 
-import ir.amv.os.vaseline.base.architecture.server.layers.base.crud.api.IBaseCrudApi;
-import ir.amv.os.vaseline.base.architecture.server.layers.multidao.crud.IBaseMultiDaoCrudApi;
+import ir.amv.os.vaseline.base.architecture.server.layers.multidao.crud.MultiDaoCrudDai;
 import ir.amv.os.vaseline.base.core.server.base.exc.BaseVaselineServerException;
 import ir.amv.os.vaseline.file.api.shared.model.base.IFileDto;
 
@@ -11,7 +10,7 @@ import java.io.OutputStream;
 /**
  * Created by AMV on 2/8/2016.
  */
-public interface IFileApi extends IBaseMultiDaoCrudApi<IFileEntity, IFileDto, Long> {
+public interface IFileApi extends MultiDaoCrudDai<IFileEntity, IFileDto, Long> {
 
     String DEFAULT_CATEGORY = "sloppy";
 

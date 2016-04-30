@@ -1,7 +1,7 @@
 package ir.amv.os.vaseline.security.authorization.hibernate.impl.server.base.dao.ro;
 
 import ir.amv.os.vaseline.base.architecture.impl.hibernate.server.layers.ro.dao.BaseReadOnlyHibernateDaoImpl;
-import ir.amv.os.vaseline.base.core.server.base.ent.IBaseEntity;
+import ir.amv.os.vaseline.base.core.server.base.ent.Identifiable;
 import ir.amv.os.vaseline.base.core.shared.base.dto.base.IBaseDto;
 import ir.amv.os.vaseline.base.core.shared.base.dto.paging.PagingDto;
 import ir.amv.os.vaseline.base.core.shared.util.callback.IBaseReturningCallback;
@@ -22,7 +22,7 @@ import java.util.Map;
 /**
  * Created by AMV on 2/28/2016.
  */
-public class BaseSecuredReadOnlyHibernateDaoImpl<E extends IBaseEntity<Id>, D extends IBaseDto<Id>, Id extends Serializable, SecurityCriteria extends HibernateSecurityCriteria>
+public class BaseSecuredReadOnlyHibernateDaoImpl<E extends Identifiable<Id>, D extends IBaseDto<Id>, Id extends Serializable, SecurityCriteria extends HibernateSecurityCriteria>
         extends BaseReadOnlyHibernateDaoImpl<E, D, Id>
         implements IBaseSecuredReadOnlyDao<E, D, Id, SecurityCriteria> {
 

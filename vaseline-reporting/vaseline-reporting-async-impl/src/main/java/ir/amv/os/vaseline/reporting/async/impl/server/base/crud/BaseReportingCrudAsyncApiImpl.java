@@ -1,8 +1,8 @@
 package ir.amv.os.vaseline.reporting.async.impl.server.base.crud;
 
-import ir.amv.os.vaseline.base.architecture.impl.server.layers.base.crud.api.BaseCrudApiImpl;
-import ir.amv.os.vaseline.base.architecture.server.layers.base.crud.dao.IBaseCrudDao;
-import ir.amv.os.vaseline.base.core.server.base.ent.IBaseEntity;
+import ir.amv.os.vaseline.base.architecture.impl.server.layers.base.crud.dai.BaseCrudDai;
+import ir.amv.os.vaseline.base.architecture.server.layers.base.crud.dao.CrudDao;
+import ir.amv.os.vaseline.base.core.server.base.ent.Identifiable;
 import ir.amv.os.vaseline.base.core.server.base.exc.BaseVaselineServerException;
 import ir.amv.os.vaseline.base.core.shared.base.dto.base.IBaseDto;
 import ir.amv.os.vaseline.base.core.shared.base.dto.paging.PagingDto;
@@ -23,8 +23,8 @@ import java.util.List;
 /**
  * Created by AMV on 2/14/2016.
  */
-public class BaseReportingCrudAsyncApiImpl<E extends IBaseEntity<Id>, D extends IBaseDto<Id>, Id extends Serializable, DAO extends IBaseCrudDao<E, D, Id>>
-        extends BaseCrudApiImpl<E, D, Id, DAO>
+public class BaseReportingCrudAsyncApiImpl<E extends Identifiable<Id>, D extends IBaseDto<Id>, Id extends Serializable, DAO extends CrudDao<E, D, Id>>
+        extends BaseCrudDai<E, D, Id, DAO>
         implements IBaseReportingCrudAsyncApi<E, D, Id>{
 
     private ICreateReportApi createReportApi;

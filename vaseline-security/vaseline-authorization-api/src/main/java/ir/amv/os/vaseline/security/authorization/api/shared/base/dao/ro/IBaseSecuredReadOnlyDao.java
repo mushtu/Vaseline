@@ -1,7 +1,7 @@
 package ir.amv.os.vaseline.security.authorization.api.shared.base.dao.ro;
 
-import ir.amv.os.vaseline.base.architecture.server.layers.base.ro.dao.IBaseReadOnlyDao;
-import ir.amv.os.vaseline.base.core.server.base.ent.IBaseEntity;
+import ir.amv.os.vaseline.base.architecture.server.layers.base.ro.dao.ReadOnlyDao;
+import ir.amv.os.vaseline.base.core.server.base.ent.Identifiable;
 import ir.amv.os.vaseline.base.core.shared.base.dto.base.IBaseDto;
 import ir.amv.os.vaseline.base.core.shared.base.dto.paging.PagingDto;
 import ir.amv.os.vaseline.security.authorization.api.shared.criteria.ISecurityCriteria;
@@ -12,8 +12,8 @@ import java.util.List;
 /**
  * Created by AMV on 2/25/2016.
  */
-public interface IBaseSecuredReadOnlyDao<E extends IBaseEntity<Id>, D extends IBaseDto<Id>, Id extends Serializable, SecurityCriteria extends ISecurityCriteria>
-        extends IBaseReadOnlyDao<E, D, Id> {
+public interface IBaseSecuredReadOnlyDao<E extends Identifiable<Id>, D extends IBaseDto<Id>, Id extends Serializable, SecurityCriteria extends ISecurityCriteria>
+        extends ReadOnlyDao<E, D, Id> {
 
     E getById(Id id, SecurityCriteria securityCriteria);
     E getByIdDetached(Id id, SecurityCriteria securityCriteria);
