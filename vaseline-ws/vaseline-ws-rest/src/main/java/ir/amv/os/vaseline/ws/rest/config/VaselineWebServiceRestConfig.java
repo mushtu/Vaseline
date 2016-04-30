@@ -22,6 +22,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.context.annotation.Import;
 
+import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.MessageBodyReader;
 import javax.ws.rs.ext.MessageBodyWriter;
 import javax.ws.rs.ext.RuntimeDelegate;
@@ -42,6 +43,8 @@ public class VaselineWebServiceRestConfig implements ApplicationContextAware,Ini
 
     @Autowired(required = false)
     List<VaselineRestConfigurer> configurers = Collections.emptyList();
+    @Autowired(required = false)
+    List<ExceptionMapper> exceptionMappers = Collections.emptyList();
 
     private VaselineRestConfigurerDelegate configurerDelegate;
 
@@ -76,7 +79,7 @@ public class VaselineWebServiceRestConfig implements ApplicationContextAware,Ini
     @DependsOn({ "cxf" })
     public Server jaxRsServer(
             @Qualifier("jsonWriter") MessageBodyWriter<Object> bodyWriter,
-            BaseExcludeRestServiceFilter excludeRestServiceFilter, DefaultCxfExceptionMapper exceptionMapper) {
+            BaseExcludeRestServiceFilter excludeRestServiceFilter, DefaultCxfExceptionMapper defaultCxfExceptionMapper) {
         JAXRSServerFactoryBean factory = RuntimeDelegate.getInstance()
                 .createEndpoint(jaxRsApiApplication(),
                         JAXRSServerFactoryBean.class);
@@ -112,11 +115,13 @@ public class VaselineWebServiceRestConfig implements ApplicationContextAware,Ini
         VaselineRestConfiguration config = vaselineRestConfiguration();
         List<Object> providers = config.getProviders();
         providers.add(bodyWriter);
-        providers.add(exceptionMapper);
-        factory.setProviders(providers);
+        providers.add(defaultCxfExceptionMapper); // add default exception mapper
+        factory.setProviders(providers);    // add custom exception mappers from configuration
+        factory.setProviders(exceptionMappers); // add registered exception mappers beans
         factory.setAddress(config.getBaseAddress());
         return factory.create();
     }
+
 
     @Bean
     public VaselineRestConfiguration vaselineRestConfiguration()
