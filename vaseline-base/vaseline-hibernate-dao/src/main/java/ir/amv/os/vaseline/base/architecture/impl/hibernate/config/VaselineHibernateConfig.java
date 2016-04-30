@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.env.Environment;
+import org.springframework.core.io.Resource;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
@@ -62,21 +63,26 @@ public class VaselineHibernateConfig implements InitializingBean {
     @Bean
     public SessionFactory sessionFactory(DataSource dataSource) {
 
-        LocalSessionFactoryBean em = new LocalSessionFactoryBean();
-        em.setDataSource(dataSource);
-        em.setHibernateProperties(additionalProperties());
+        LocalSessionFactoryBean sf = new LocalSessionFactoryBean();
+        sf.setDataSource(dataSource);
+        sf.setHibernateProperties(additionalProperties());
         List<String> packages = new ArrayList<String>();
         configurerDelegate.configurePackagesToScan(packages);
+        List<Resource> rscList = new ArrayList<Resource>();
+        configurerDelegate.configureResourceLocations(rscList);
+        Resource[] rscArr = new Resource[rscList.size()];
+        sf.setMappingLocations(rscList.toArray(rscArr));
         packages.add("ir.amv"); //todo remove hard coded package name!!
         String[] arr = new String[packages.size()];
-        em.setPackagesToScan(packages.toArray(arr));
+        sf.setPackagesToScan(packages.toArray(arr));
+
         try {
-            em.afterPropertiesSet();
+            sf.afterPropertiesSet();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return em.getObject();
+        return sf.getObject();
     }
 
     @Bean

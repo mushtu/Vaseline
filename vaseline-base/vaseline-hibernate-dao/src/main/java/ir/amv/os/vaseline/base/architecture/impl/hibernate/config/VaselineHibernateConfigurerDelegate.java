@@ -1,5 +1,6 @@
 package ir.amv.os.vaseline.base.architecture.impl.hibernate.config;
 
+import org.springframework.core.io.Resource;
 import org.springframework.util.Assert;
 
 import java.util.List;
@@ -22,4 +23,11 @@ public class VaselineHibernateConfigurerDelegate implements VaselineHibernateCon
         for(VaselineHibernateConfigurer configurer:delegates)
             configurer.configurePackagesToScan(packages);
     }
+
+    @Override
+    public void configureResourceLocations(List<Resource> resources) {
+        for(VaselineHibernateConfigurer configurer:delegates)
+            configurer.configureResourceLocations(resources);
+    }
+
 }
