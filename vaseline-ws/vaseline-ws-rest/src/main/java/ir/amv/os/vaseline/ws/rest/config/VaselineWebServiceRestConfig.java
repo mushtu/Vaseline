@@ -8,7 +8,7 @@ import ir.amv.os.vaseline.ws.rest.config.exception.DefaultCxfExceptionMapper;
 import ir.amv.os.vaseline.ws.rest.config.exclude.annot.ExcludeRestService;
 import ir.amv.os.vaseline.ws.rest.config.exclude.impl.BaseExcludeRestServiceFilter;
 import ir.amv.os.vaseline.ws.rest.config.gsonhandler.GsonMessageBodyHandler;
-import ir.amv.os.vaseline.ws.rest.server.base.parent.IBaseRestService;
+import ir.amv.os.vaseline.ws.rest.server.base.parent.Resource;
 import org.apache.cxf.endpoint.Server;
 import org.apache.cxf.jaxrs.JAXRSServerFactoryBean;
 import org.springframework.beans.BeansException;
@@ -85,15 +85,15 @@ public class VaselineWebServiceRestConfig implements ApplicationContextAware,Ini
                         JAXRSServerFactoryBean.class);
         restBeansList = new ArrayList<Object>();
 
-        Map<String, IBaseRestService> beansOfType = applicationContext.getBeansOfType(IBaseRestService.class);
+        Map<String, Resource> beansOfType = applicationContext.getBeansOfType(Resource.class);
         List<String> excludedBeanNames = excludeRestServiceFilter.excludedBeanNames();
         List<Class<?>> excludedBeanClasses = excludeRestServiceFilter.excludedBeanClasses();
         for (String beanName : beansOfType.keySet()) {
             if (excludedBeanNames != null && excludedBeanNames.contains(beanName)) {
                 continue;
             }
-            IBaseRestService restService = beansOfType.get(beanName);
-            Class<? extends IBaseRestService> restServiceClass = restService.getClass();
+            Resource restService = beansOfType.get(beanName);
+            Class<? extends Resource> restServiceClass = restService.getClass();
             if (excludedBeanClasses != null) {
                 boolean found = false;
                 for (Class<?> excludedClass : excludedBeanClasses) {

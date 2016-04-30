@@ -4,8 +4,7 @@ import ir.amv.os.vaseline.base.architecture.server.layers.base.ro.service.IBaseR
 import ir.amv.os.vaseline.base.core.shared.base.dto.base.IBaseDto;
 import ir.amv.os.vaseline.base.core.shared.base.dto.paging.PagingDto;
 import ir.amv.os.vaseline.base.core.shared.base.exc.BaseVaselineClientException;
-import ir.amv.os.vaseline.ws.rest.server.base.parent.impl.BaseRestServiceImpl;
-import ir.amv.os.vaseline.ws.rest.server.base.ro.IBaseReadOnlyRestService;
+import ir.amv.os.vaseline.ws.rest.server.base.ro.ReadOnlyResource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.Serializable;
@@ -15,9 +14,8 @@ import java.util.Map;
 /**
  * Created by AMV on 2/13/2016.
  */
-public class BaseReadOnlyRestServiceImpl<D extends IBaseDto<Id>, Id extends Serializable, S extends IBaseReadOnlyService<D, Id>>
-        extends BaseRestServiceImpl
-        implements IBaseReadOnlyRestService<D, Id>{
+public class ReadOnlyResourceImpl<D extends IBaseDto<Id>, Id extends Serializable, S extends IBaseReadOnlyService<D, Id>>
+        implements ReadOnlyResource<D, Id> {
 
     protected S service;
 
