@@ -5,7 +5,7 @@ import javax.ws.rs.ext.ExceptionMapper;
 
 public class DefaultCxfExceptionMapper implements ExceptionMapper<Exception> {
 
-//	public static class CxfErrorObject {
+    //	public static class CxfErrorObject {
 //		private String errorMessage;
 //		private Boolean success = false;
 //		public CxfErrorObject() {
@@ -27,9 +27,9 @@ public class DefaultCxfExceptionMapper implements ExceptionMapper<Exception> {
 //			this.success = success;
 //		}
 //	}
-	@Override
-	public Response toResponse(Exception exception) {
-		return Response.status(Response.Status.OK).entity(exception.getMessage()).build();
-	}
+    @Override
+    public Response toResponse(Exception exception) {
+        return Response.status(Response.Status.OK).entity(exception.getMessage()).build();
+    }
 
 }

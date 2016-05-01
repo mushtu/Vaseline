@@ -11,7 +11,7 @@ import java.util.Date;
  * Created by AMV on 2/9/2016.
  */
 @Entity
-@Table(name =  "FILE_BLOB")
+@Table(name = "FILE_BLOB")
 public class FileBlobEntity extends BaseJpaEntity<Long> implements IFileEntity {
 
     private String fileName;

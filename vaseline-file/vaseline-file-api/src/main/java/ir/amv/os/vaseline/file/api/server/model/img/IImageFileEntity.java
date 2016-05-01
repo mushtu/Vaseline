@@ -7,5 +7,6 @@ import ir.amv.os.vaseline.file.api.server.model.base.IFileEntity;
  */
 public interface IImageFileEntity extends IFileEntity {
     Integer getImageWidth();
+
     Integer getImageHeight();
 }

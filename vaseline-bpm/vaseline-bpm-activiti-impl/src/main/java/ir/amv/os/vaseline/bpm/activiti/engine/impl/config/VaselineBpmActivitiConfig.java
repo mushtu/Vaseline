@@ -33,9 +33,9 @@ import java.util.List;
 public class VaselineBpmActivitiConfig
         implements ApplicationContextAware {
 
-    private ApplicationContext applicationContext;
     @Autowired
     Environment environment;
+    private ApplicationContext applicationContext;
 
     @Bean(name = "activitiDbInitializer")
     public DataSourceInitializer activitiDbInitializer(DataSource dataSource) {

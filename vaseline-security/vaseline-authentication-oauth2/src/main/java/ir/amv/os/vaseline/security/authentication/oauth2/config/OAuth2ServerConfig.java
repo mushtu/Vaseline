@@ -42,7 +42,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 /**
  * @author Rob Winch
- * 
  */
 @Configuration
 @Import({
@@ -52,7 +51,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 })
 public class OAuth2ServerConfig {
 
-	private static final String APP_RESOURCE_ID = "sparklr";
+    private static final String APP_RESOURCE_ID = "sparklr";
 
     @Bean
     public IHttpSecurityConfigurer inAppConfigurer() {
@@ -101,55 +100,55 @@ public class OAuth2ServerConfig {
         };
     }
 
-	@Configuration
-	@EnableResourceServer
-	protected static class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
+    @Configuration
+    @EnableResourceServer
+    protected static class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
 
-		@Override
-		public void configure(ResourceServerSecurityConfigurer resources) {
-			resources.resourceId(APP_RESOURCE_ID).stateless(false);
-		}
+        @Override
+        public void configure(ResourceServerSecurityConfigurer resources) {
+            resources.resourceId(APP_RESOURCE_ID).stateless(false);
+        }
 
-		@Override
-		public void configure(HttpSecurity http) throws Exception {
-			// @formatter:off
-			http
-				// Since we want the protected resources to be accessible in the UI as well we need 
-				// session creation to be allowed (it's disabled by default in 2.0.6)
-				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
-					.and()
-					.requestMatchers().antMatchers("/cxf/rest/**", "/cxf/soap/**")
-					.and()
-					.authorizeRequests()
-					.antMatchers("/cxf/rest/**", "/cxf/soap/**").access("#oauth2.hasScope('app') or (!#oauth2.isOAuth() and isAuthenticated())");
-			// @formatter:on
-		}
+        @Override
+        public void configure(HttpSecurity http) throws Exception {
+            // @formatter:off
+            http
+                    // Since we want the protected resources to be accessible in the UI as well we need
+                    // session creation to be allowed (it's disabled by default in 2.0.6)
+                    .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+                    .and()
+                    .requestMatchers().antMatchers("/cxf/rest/**", "/cxf/soap/**")
+                    .and()
+                    .authorizeRequests()
+                    .antMatchers("/cxf/rest/**", "/cxf/soap/**").access("#oauth2.hasScope('app') or (!#oauth2.isOAuth() and isAuthenticated())");
+            // @formatter:on
+        }
 
-	}
+    }
 
-	@Configuration
+    @Configuration
     @Import(Stuff.class)
-	@EnableAuthorizationServer
-	protected static class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
+    @EnableAuthorizationServer
+    protected static class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
 
-		@Autowired
-		private TokenStore tokenStore;
+        @Autowired
+        private TokenStore tokenStore;
 
-		@Autowired
-		private UserApprovalHandler userApprovalHandler;
+        @Autowired
+        private UserApprovalHandler userApprovalHandler;
 
-		@Autowired
+        @Autowired
 //		@Qualifier("authenticationManagerBean")
-		private AuthenticationManager authenticationManager;
+        private AuthenticationManager authenticationManager;
 
 //		@Value("${tonr.redirect:http://localhost:8080/tonr2/sparklr/redirect}")
 //		private String tonrRedirectUri;
 
-		@Override
-		public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+        @Override
+        public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 
-			// @formatter:off
-			clients.inMemory()
+            // @formatter:off
+            clients.inMemory()
 //					.withClient("mobile")
 //			 			.resourceIds(APP_RESOURCE_ID)
 //			 			.authorizedGrantTypes("authorization_code", "client credentials")
@@ -172,12 +171,12 @@ public class OAuth2ServerConfig {
 //	 			        .scopes("read", "trust")
 //	 			        .redirectUris("http://anywhere?key=value")
 //		 		    .and()
-	 		        .withClient("my-trusted-client")
- 			            .authorizedGrantTypes("password", "authorization_code", "refresh_token", "implicit")
- 			            .authorities("IS_AUTHENTICATED")
- 			            .scopes("app")
-                        .secret("secret")
- 			            .accessTokenValiditySeconds(60)
+                    .withClient("my-trusted-client")
+                    .authorizedGrantTypes("password", "authorization_code", "refresh_token", "implicit")
+                    .authorities("IS_AUTHENTICATED")
+                    .scopes("app")
+                    .secret("secret")
+                    .accessTokenValiditySeconds(60)
 //		 		    .and()
 //	 		        .withClient("my-trusted-client-with-secret")
 // 			            .authorizedGrantTypes("password", "authorization_code", "refresh_token", "implicit")
@@ -195,56 +194,56 @@ public class OAuth2ServerConfig {
 //		                .authorities("ROLE_CLIENT")
 //		                .scopes("read", "write", "trust")
 //		                .autoApprove(true)
-					;
-			// @formatter:on
-		}
+            ;
+            // @formatter:on
+        }
 
-		@Bean
-		public TokenStore tokenStore() {
-			return new InMemoryTokenStore();
-		}
+        @Bean
+        public TokenStore tokenStore() {
+            return new InMemoryTokenStore();
+        }
 
-		@Override
-		public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-			endpoints.tokenStore(tokenStore).userApprovalHandler(userApprovalHandler)
-					.authenticationManager(authenticationManager);
-		}
+        @Override
+        public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+            endpoints.tokenStore(tokenStore).userApprovalHandler(userApprovalHandler)
+                    .authenticationManager(authenticationManager);
+        }
 
-		@Override
-		public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
+        @Override
+        public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
 //			oauthServer.realm("sample-project/client");
             oauthServer.allowFormAuthenticationForClients();
-		}
+        }
 
-	}
+    }
 
-	@Configuration
-	protected static class Stuff {
+    @Configuration
+    protected static class Stuff {
 
-		@Autowired
-		private ClientDetailsService clientDetailsService;
+        @Autowired
+        private ClientDetailsService clientDetailsService;
 
-		@Autowired
-		private TokenStore tokenStore;
+        @Autowired
+        private TokenStore tokenStore;
 
-		@Bean
-		public ApprovalStore approvalStore() throws Exception {
-			TokenApprovalStore store = new TokenApprovalStore();
-			store.setTokenStore(tokenStore);
-			return store;
-		}
+        @Bean
+        public ApprovalStore approvalStore() throws Exception {
+            TokenApprovalStore store = new TokenApprovalStore();
+            store.setTokenStore(tokenStore);
+            return store;
+        }
 
-		@Bean
-		@Lazy
-		@Scope(proxyMode = ScopedProxyMode.TARGET_CLASS)
-		public SparklrUserApprovalHandler userApprovalHandler() throws Exception {
-			SparklrUserApprovalHandler handler = new SparklrUserApprovalHandler();
-			handler.setApprovalStore(approvalStore());
-			handler.setRequestFactory(new DefaultOAuth2RequestFactory(clientDetailsService));
-			handler.setClientDetailsService(clientDetailsService);
-			handler.setUseApprovalStore(true);
-			return handler;
-		}
-	}
+        @Bean
+        @Lazy
+        @Scope(proxyMode = ScopedProxyMode.TARGET_CLASS)
+        public SparklrUserApprovalHandler userApprovalHandler() throws Exception {
+            SparklrUserApprovalHandler handler = new SparklrUserApprovalHandler();
+            handler.setApprovalStore(approvalStore());
+            handler.setRequestFactory(new DefaultOAuth2RequestFactory(clientDetailsService));
+            handler.setClientDetailsService(clientDetailsService);
+            handler.setUseApprovalStore(true);
+            return handler;
+        }
+    }
 
 }

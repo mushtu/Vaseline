@@ -6,25 +6,25 @@ import java.util.Map;
 
 public class GoToTaskFormRespDto extends BaseBpmResponseDto {
 
-	private static final long serialVersionUID = 1L;
-	
-	private String eventName;
-	private Map<String, Object> variables;
+    private static final long serialVersionUID = 1L;
 
-	public String getEventName() {
-		return eventName;
-	}
+    private String eventName;
+    private Map<String, Object> variables;
 
-	public void setEventName(String eventName) {
-		this.eventName = eventName;
-	}
+    public String getEventName() {
+        return eventName;
+    }
 
-	public Map<String, Object> getVariables() {
-		return variables;
-	}
+    public void setEventName(String eventName) {
+        this.eventName = eventName;
+    }
 
-	public void setVariables(Map<String, Object> variables) {
-		this.variables = variables;
-	}
+    public Map<String, Object> getVariables() {
+        return variables;
+    }
+
+    public void setVariables(Map<String, Object> variables) {
+        this.variables = variables;
+    }
 
 }

@@ -20,14 +20,19 @@ public interface IBaseSecuredReadOnlyApi<E extends Identifiable<Id>, D extends I
     E getByIdNotSecured(Id id) throws BaseVaselineServerException;
 
     Long countAllNotSecured() throws BaseVaselineServerException;
+
     List<E> getAllNotSecured() throws BaseVaselineServerException;
+
     List<E> getAllNotSecured(PagingDto pagingDto) throws BaseVaselineServerException;
 
     Long countByExampleNotSecured(D example) throws BaseVaselineServerException;
+
     List<E> searchByExampleNotSecured(D example) throws BaseVaselineServerException;
+
     List<E> searchByExampleNotSecured(D example, PagingDto pagingDto)
             throws BaseVaselineServerException;
 
     String getReadOperationTreeName();
+
     String getRootOperationTreeName();
 }

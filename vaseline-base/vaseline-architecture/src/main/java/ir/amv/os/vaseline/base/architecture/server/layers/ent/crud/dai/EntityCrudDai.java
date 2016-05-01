@@ -11,11 +11,14 @@ public interface EntityCrudDai<E extends Identifiable<?>>
         extends EntityReadOnlyDai<E> {
 
     void preSave(E entity) throws BaseVaselineServerException;
+
     void postSave(E entity) throws BaseVaselineServerException;
 
     void preUpdate(E entity) throws BaseVaselineServerException;
+
     void postUpdate(E entity) throws BaseVaselineServerException;
 
     void preDelete(E entity) throws BaseVaselineServerException;
+
     void postDelete(E entity) throws BaseVaselineServerException;
 }

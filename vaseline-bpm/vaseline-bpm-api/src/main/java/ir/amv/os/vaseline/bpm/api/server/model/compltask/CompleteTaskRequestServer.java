@@ -7,31 +7,31 @@ import java.util.Map;
 
 public class CompleteTaskRequestServer extends BaseBpmRequestServer {
 
-	private String description;
-	private String taskId;
-	private Map<String, Object> variables;
+    private String description;
+    private String taskId;
+    private Map<String, Object> variables;
 
-	public String getTaskId() {
-		return taskId;
-	}
+    public String getTaskId() {
+        return taskId;
+    }
 
-	public void setTaskId(String taskId) {
-		this.taskId = taskId;
-	}
+    public void setTaskId(String taskId) {
+        this.taskId = taskId;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public Map<String, Object> getVariables() {
-		return variables;
-	}
+    public Map<String, Object> getVariables() {
+        return variables;
+    }
 
-	public void setVariables(Map<String, Object> variables) {
-		this.variables = variables;
-	}
+    public void setVariables(Map<String, Object> variables) {
+        this.variables = variables;
+    }
 }

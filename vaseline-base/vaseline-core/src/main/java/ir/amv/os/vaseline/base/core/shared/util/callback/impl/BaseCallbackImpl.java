@@ -4,8 +4,8 @@ import ir.amv.os.vaseline.base.core.shared.util.callback.IBaseCallback;
 
 public abstract class BaseCallbackImpl<T, F> implements IBaseCallback<T, F> {
 
-	@Override
-	public void onFailure(F failure) {
-	}
+    @Override
+    public void onFailure(F failure) {
+    }
 
 }

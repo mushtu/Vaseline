@@ -7,5 +7,5 @@ import java.util.List;
 public interface IUserPermissionsProvider {
 
 
-	List<SimpleGrantedAuthority> getUserAuthorities(String username);
+    List<SimpleGrantedAuthority> getUserAuthorities(String username);
 }

@@ -4,6 +4,7 @@ import net.sf.jasperreports.engine.JRField;
 
 public interface IBaseFieldPostProcessor<C> {
 
-	boolean accept(JRField field);
-	C postProcess(C value);
+    boolean accept(JRField field);
+
+    C postProcess(C value);
 }

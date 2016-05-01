@@ -17,13 +17,17 @@ public interface MultiDaoCrudDai<E extends Identifiable<Id>, D extends IBaseDto<
         extends MultiDaoReadOnlyDai<E, D, Id>, EntityCrudDai<E> {
 
     Id save(String coreId, E entity) throws BaseVaselineServerException;
-    List<Id> saveBatch(String coreId, List<E> entities) throws  BaseVaselineServerException;
+
+    List<Id> saveBatch(String coreId, List<E> entities) throws BaseVaselineServerException;
 
     void update(String coreId, E entity) throws BaseVaselineServerException;
-    void updateBatch(String coreId, List<E> entities) throws  BaseVaselineServerException;
+
+    void updateBatch(String coreId, List<E> entities) throws BaseVaselineServerException;
 
     void delete(String coreId, E entity) throws BaseVaselineServerException;
-    void deleteBatch(String coreId, List<E> entities) throws  BaseVaselineServerException;
+
+    void deleteBatch(String coreId, List<E> entities) throws BaseVaselineServerException;
+
     void delete(String coreId, Id id) throws BaseVaselineServerException;
 
     @Override

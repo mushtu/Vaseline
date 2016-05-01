@@ -26,7 +26,10 @@ import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.MessageBodyReader;
 import javax.ws.rs.ext.MessageBodyWriter;
 import javax.ws.rs.ext.RuntimeDelegate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by AMV on 2/13/2016.
@@ -36,16 +39,14 @@ import java.util.*;
         VaselineWebServiceCommonConfig.class,
         VaselineJsonConfig.class
 })
-public class VaselineWebServiceRestConfig implements ApplicationContextAware,InitializingBean {
-
-    private ApplicationContext applicationContext;
-    private ArrayList<Object> restBeansList;
+public class VaselineWebServiceRestConfig implements ApplicationContextAware, InitializingBean {
 
     @Autowired(required = false)
     List<VaselineRestConfigurer> configurers = Collections.emptyList();
     @Autowired(required = false)
     List<ExceptionMapper> exceptionMappers = Collections.emptyList();
-
+    private ApplicationContext applicationContext;
+    private ArrayList<Object> restBeansList;
     private VaselineRestConfigurerDelegate configurerDelegate;
 
     @Bean
@@ -76,7 +77,7 @@ public class VaselineWebServiceRestConfig implements ApplicationContextAware,Ini
     }
 
     @Bean
-    @DependsOn({ "cxf" })
+    @DependsOn({"cxf"})
     public Server jaxRsServer(
             @Qualifier("jsonWriter") MessageBodyWriter<Object> bodyWriter,
             BaseExcludeRestServiceFilter excludeRestServiceFilter, DefaultCxfExceptionMapper defaultCxfExceptionMapper) {
@@ -124,8 +125,7 @@ public class VaselineWebServiceRestConfig implements ApplicationContextAware,Ini
 
 
     @Bean
-    public VaselineRestConfiguration vaselineRestConfiguration()
-    {
+    public VaselineRestConfiguration vaselineRestConfiguration() {
         VaselineRestConfiguration config = new VaselineRestConfiguration();
         config.setBaseAddress("/rest");
         configurerDelegate.configureRestService(config);

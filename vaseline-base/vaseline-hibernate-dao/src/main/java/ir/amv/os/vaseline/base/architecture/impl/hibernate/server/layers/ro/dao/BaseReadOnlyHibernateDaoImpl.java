@@ -27,13 +27,13 @@ public class BaseReadOnlyHibernateDaoImpl<E extends Identifiable<Id>, D extends 
         implements ReadOnlyDao<E, D, Id> {
 
     protected SessionFactory sessionFactory;
-    private Class<E> entityClass;
     protected IPagingResultCreator pagingResultCreator;
+    private Class<E> entityClass;
 
     public BaseReadOnlyHibernateDaoImpl() {
         Class<?>[] genericArgumentClasses = ReflectionUtil.getGenericArgumentClasses(getClass());
         if (genericArgumentClasses != null) {
-            setEntityClass((Class<E>)genericArgumentClasses[0]);
+            setEntityClass((Class<E>) genericArgumentClasses[0]);
         }
     }
 
@@ -136,7 +136,7 @@ public class BaseReadOnlyHibernateDaoImpl<E extends Identifiable<Id>, D extends 
     }
 
     public Criteria paginateCriteria(Criteria criteria,
-                                        final PagingDto paginationObject) {
+                                     final PagingDto paginationObject) {
         List<SortDto> sortList = paginationObject.getSortList();
         if (sortList == null || sortList.isEmpty()) {
             criteria.addOrder(Order.desc("id"));
@@ -184,13 +184,13 @@ public class BaseReadOnlyHibernateDaoImpl<E extends Identifiable<Id>, D extends 
     }
 
     @Override
-    public void setEntityClass(Class<E> entityClass) {
-        this.entityClass = entityClass;
+    public Class<E> getEntityClass() {
+        return entityClass;
     }
 
     @Override
-    public Class<E> getEntityClass() {
-        return entityClass;
+    public void setEntityClass(Class<E> entityClass) {
+        this.entityClass = entityClass;
     }
 
     // Spring Dependencies

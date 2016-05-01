@@ -20,16 +20,22 @@ public interface IBaseSecuredCrudApi<E extends Identifiable<Id>, D extends IBase
     String BASE_OP_DELETE = "delete";
 
     Id saveNotSecured(E entity) throws BaseVaselineServerException;
-    List<Id> saveBatchNotSecured(List<E> entities) throws  BaseVaselineServerException;
+
+    List<Id> saveBatchNotSecured(List<E> entities) throws BaseVaselineServerException;
 
     void updateNotSecured(E entity) throws BaseVaselineServerException;
-    void updateBatchNotSecured(List<E> entities) throws  BaseVaselineServerException;
+
+    void updateBatchNotSecured(List<E> entities) throws BaseVaselineServerException;
 
     void deleteNotSecured(E entity) throws BaseVaselineServerException;
-    void deleteBatchNotSecured(List<E> entities) throws  BaseVaselineServerException;
+
+    void deleteBatchNotSecured(List<E> entities) throws BaseVaselineServerException;
+
     void deleteNotSecured(Id id) throws BaseVaselineServerException;
 
     String getCreateOperationTreeName();
+
     String getUpdateOperationTreeName();
+
     String getDeleteOperationTreeName();
 }

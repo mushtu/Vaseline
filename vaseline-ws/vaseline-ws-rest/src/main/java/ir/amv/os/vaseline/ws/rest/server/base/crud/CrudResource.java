@@ -17,5 +17,6 @@ public interface CrudResource<D extends IBaseDto<Id>, Id extends Serializable>
     void update(D t) throws BaseVaselineClientException;
 
     void delete(D id) throws BaseVaselineClientException;
+
     void deleteById(Id id) throws BaseVaselineClientException;
 }

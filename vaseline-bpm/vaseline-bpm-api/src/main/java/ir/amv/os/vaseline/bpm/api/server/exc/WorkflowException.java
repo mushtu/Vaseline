@@ -4,6 +4,6 @@ import ir.amv.os.vaseline.base.core.server.base.exc.BaseVaselineServerException;
 
 public class WorkflowException extends BaseVaselineServerException {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
 }

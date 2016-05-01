@@ -12,5 +12,6 @@ public interface HasModifyDateEntity<Id extends Serializable>
         extends Identifiable<Id> {
 
     Date getModifyDate();
+
     void setModifyDate(Date modifyDate);
 }

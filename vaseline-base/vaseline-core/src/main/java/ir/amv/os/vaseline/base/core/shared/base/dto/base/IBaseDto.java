@@ -6,5 +6,6 @@ package ir.amv.os.vaseline.base.core.shared.base.dto.base;
 public interface IBaseDto<Id> extends IBaseEmptyDto {
 
     Id getId();
+
     void setId(Id id);
 }

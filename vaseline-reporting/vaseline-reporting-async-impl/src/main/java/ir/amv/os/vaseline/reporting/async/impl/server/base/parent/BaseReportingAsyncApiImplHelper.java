@@ -29,6 +29,8 @@ import java.util.concurrent.Future;
  */
 public class BaseReportingAsyncApiImplHelper {
 
+    private static List<IBaseReportRequestFiller> reportRequestFillers = new ArrayList<IBaseReportRequestFiller>();
+
     private BaseReportingAsyncApiImplHelper() {
     }
 
@@ -112,7 +114,6 @@ public class BaseReportingAsyncApiImplHelper {
         return "report";
     }
 
-    private static List<IBaseReportRequestFiller> reportRequestFillers = new ArrayList<IBaseReportRequestFiller>();
     public static void addReportRequestFiller(IBaseReportRequestFiller reportRequestFiller) {
         reportRequestFillers.add(reportRequestFiller);
     }

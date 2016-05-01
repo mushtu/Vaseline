@@ -19,7 +19,7 @@ public class BaseReadOnlyDaiHelper {
     }
 
     public static <E extends Identifiable<Id>, D extends IBaseDto<Id>, Id extends Serializable>
-            E getById(
+    E getById(
             EntityReadOnlyDai<E> api,
             ReadOnlyDao<E, D, Id> dao,
             Id id)
@@ -30,7 +30,7 @@ public class BaseReadOnlyDaiHelper {
     }
 
     public static <E extends Identifiable<Id>, D extends IBaseDto<Id>, Id extends Serializable>
-            Long countAll(
+    Long countAll(
             EntityReadOnlyDai<E> api,
             ReadOnlyDao<E, D, Id> dao)
             throws BaseVaselineServerException {
@@ -39,7 +39,7 @@ public class BaseReadOnlyDaiHelper {
     }
 
     public static <E extends Identifiable<Id>, D extends IBaseDto<Id>, Id extends Serializable>
-            List<E> getAll(
+    List<E> getAll(
             EntityReadOnlyDai<E> api,
             ReadOnlyDao<E, D, Id> dao)
             throws BaseVaselineServerException {
@@ -53,7 +53,7 @@ public class BaseReadOnlyDaiHelper {
     }
 
     public static <E extends Identifiable<Id>, D extends IBaseDto<Id>, Id extends Serializable>
-            List<E> getAll(
+    List<E> getAll(
             EntityReadOnlyDai<E> api,
             ReadOnlyDao<E, D, Id> dao,
             PagingDto pagingDto)
@@ -68,7 +68,7 @@ public class BaseReadOnlyDaiHelper {
     }
 
     public static <E extends Identifiable<Id>, D extends IBaseDto<Id>, Id extends Serializable>
-            Long countByExample(
+    Long countByExample(
             EntityReadOnlyDai<E> api,
             ReadOnlyDao<E, D, Id> dao,
             D example)
@@ -78,7 +78,7 @@ public class BaseReadOnlyDaiHelper {
     }
 
     public static <E extends Identifiable<Id>, D extends IBaseDto<Id>, Id extends Serializable>
-            List<E> searchByExample(
+    List<E> searchByExample(
             EntityReadOnlyDai<E> api,
             ReadOnlyDao<E, D, Id> dao,
             D example)
@@ -93,7 +93,7 @@ public class BaseReadOnlyDaiHelper {
     }
 
     public static <E extends Identifiable<Id>, D extends IBaseDto<Id>, Id extends Serializable>
-            List<E> searchByExample(
+    List<E> searchByExample(
             EntityReadOnlyDai<E> api,
             ReadOnlyDao<E, D, Id> dao,
             D example,

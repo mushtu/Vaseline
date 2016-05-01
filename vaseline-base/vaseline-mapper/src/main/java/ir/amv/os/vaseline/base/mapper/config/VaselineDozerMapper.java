@@ -48,7 +48,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * instances of it for performance reasons. Typically a system will only have one DozerBeanMapper instance per VM. If
  * you are using an IOC framework (i.e Spring), define the Mapper as singleton="true". If you are not using an IOC
  * framework, a DozerBeanMapperSingletonWrapper convenience class has been provided in the Dozer jar.
- * <p/>
+ * <p>
  * It is technically possible to have multiple DozerBeanMapper instances initialized, but it will hinder internal
  * performance optimizations such as caching.
  *
@@ -71,17 +71,15 @@ public class VaselineDozerMapper implements Mapper {
     private final List<CustomConverter> customConverters = new ArrayList<CustomConverter>();
     private final List<MappingFileData> builderMappings = new ArrayList<MappingFileData>();
     private final Map<String, CustomConverter> customConvertersWithId = new HashMap<String, CustomConverter>();
+    // There are no global caches. Caches are per bean mapper instance
+    private final CacheManager cacheManager = new DozerCacheManager();
     private List<? extends DozerEventListener> eventListeners = new ArrayList<DozerEventListener>();
-
     private CustomFieldMapper customFieldMapper;
-
     /*
      * Not accessible for injection
      */
     private ClassMappings customMappings;
     private Configuration globalConfiguration;
-    // There are no global caches. Caches are per bean mapper instance
-    private final CacheManager cacheManager = new DozerCacheManager();
     private DozerEventManager eventManager;
     private List<Class<?>> customConvertersClasses;
 
@@ -150,18 +148,30 @@ public class VaselineDozerMapper implements Mapper {
         DestBeanCreator.setStoredFactories(factories);
     }
 
+    public List<CustomConverter> getCustomConverters() {
+        return Collections.unmodifiableList(customConverters);
+    }
+
     public void setCustomConverters(List<CustomConverter> customConverters) {
         checkIfInitialized();
         this.customConverters.clear();
         this.customConverters.addAll(customConverters);
     }
 
-    public List<CustomConverter> getCustomConverters() {
-        return Collections.unmodifiableList(customConverters);
-    }
-
     public Map<String, CustomConverter> getCustomConvertersWithId() {
         return Collections.unmodifiableMap(customConvertersWithId);
+    }
+
+    /**
+     * Converters passed with this method could be further referenced in mappings via its unique id.
+     * Converter instances passed that way are considered stateful and will not be initialized for each mapping.
+     *
+     * @param customConvertersWithId converter id to converter instance map
+     */
+    public void setCustomConvertersWithId(Map<String, CustomConverter> customConvertersWithId) {
+        checkIfInitialized();
+        this.customConvertersWithId.clear();
+        this.customConvertersWithId.putAll(customConvertersWithId);
     }
 
     private void init() {
@@ -201,7 +211,8 @@ public class VaselineDozerMapper implements Mapper {
         }
 
         Mapper processor = new MappingProcessor(customMappings, globalConfiguration, cacheManager, statsMgr, customConverters,
-                eventManager, getCustomFieldMapper(), customConvertersWithId){};
+                eventManager, getCustomFieldMapper(), customConvertersWithId) {
+        };
 
         // If statistics are enabled, then Proxy the processor with a statistics interceptor
         if (statsMgr.isStatisticsEnabled()) {
@@ -256,18 +267,6 @@ public class VaselineDozerMapper implements Mapper {
     public void setCustomFieldMapper(CustomFieldMapper customFieldMapper) {
         checkIfInitialized();
         this.customFieldMapper = customFieldMapper;
-    }
-
-    /**
-     * Converters passed with this method could be further referenced in mappings via its unique id.
-     * Converter instances passed that way are considered stateful and will not be initialized for each mapping.
-     *
-     * @param customConvertersWithId converter id to converter instance map
-     */
-    public void setCustomConvertersWithId(Map<String, CustomConverter> customConvertersWithId) {
-        checkIfInitialized();
-        this.customConvertersWithId.clear();
-        this.customConvertersWithId.putAll(customConvertersWithId);
     }
 
     private void checkIfInitialized() {

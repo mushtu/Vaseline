@@ -35,76 +35,77 @@ import java.util.concurrent.Executor;
  * method-level by adding a corresponding {@link AsyncAnnotationAdvisor} to the
  * exposed proxy (either an existing AOP proxy or a newly generated proxy that
  * implements all of the target's interfaces).
- *
+ * <p>
  * <p>The {@link TaskExecutor} responsible for the asynchronous execution may
  * be provided as well as the annotation type that indicates a method should be
  * invoked asynchronously. If no annotation type is specified, this post-
  * processor will detect both Spring's {@link Async @Async} annotation as well
  * as the EJB 3.1 {@code javax.ejb.Asynchronous} annotation.
- *
+ * <p>
  * <p>For methods having a {@code void} return type, any exception thrown
  * during the asynchronous method invocation cannot be accessed by the
  * caller. An {@link AsyncUncaughtExceptionHandler} can be specified to handle
  * these cases.
- *
+ * <p>
  * <p>Note: The underlying async advisor applies before existing advisors by default,
  * in order to switch to async execution as early as possible in the invocation chain.
  *
  * @author Mark Fisher
  * @author Juergen Hoeller
  * @author Stephane Nicoll
- * @since 3.0
  * @see #setBeforeExistingAdvisors
+ * @since 3.0
  */
 @SuppressWarnings("serial")
 public class AsyncAnnotationBeanPostProcessor extends AbstractAdvisingBeanPostProcessor implements BeanFactoryAware {
 
-	private Class<? extends Annotation> asyncAnnotationType;
+    private Class<? extends Annotation> asyncAnnotationType;
 
-	private Executor executor;
+    private Executor executor;
 
-	private AsyncUncaughtExceptionHandler exceptionHandler;
+    private AsyncUncaughtExceptionHandler exceptionHandler;
 
 
     public AsyncAnnotationBeanPostProcessor() {
-		setBeforeExistingAdvisors(true);
-	}
+        setBeforeExistingAdvisors(true);
+    }
 
 
-	public void setAsyncAnnotationType(Class<? extends Annotation> asyncAnnotationType) {
-		Assert.notNull(asyncAnnotationType, "'asyncAnnotationType' must not be null");
-		this.asyncAnnotationType = asyncAnnotationType;
-	}
+    public void setAsyncAnnotationType(Class<? extends Annotation> asyncAnnotationType) {
+        Assert.notNull(asyncAnnotationType, "'asyncAnnotationType' must not be null");
+        this.asyncAnnotationType = asyncAnnotationType;
+    }
 
-	/**
-	 * Set the {@link Executor} to use when invoking methods asynchronously.
-	 */
-	public void setExecutor(Executor executor) {
-		this.executor = executor;
-	}
+    /**
+     * Set the {@link Executor} to use when invoking methods asynchronously.
+     */
+    public void setExecutor(Executor executor) {
+        this.executor = executor;
+    }
 
-	/**
-	 * Set the {@link AsyncUncaughtExceptionHandler} to use to handle uncaught
-	 * exceptions thrown by asynchronous method executions.
-	 * @since 4.1
-	 */
-	public void setExceptionHandler(AsyncUncaughtExceptionHandler exceptionHandler) {
-		this.exceptionHandler = exceptionHandler;
-	}
+    /**
+     * Set the {@link AsyncUncaughtExceptionHandler} to use to handle uncaught
+     * exceptions thrown by asynchronous method executions.
+     *
+     * @since 4.1
+     */
+    public void setExceptionHandler(AsyncUncaughtExceptionHandler exceptionHandler) {
+        this.exceptionHandler = exceptionHandler;
+    }
 
-	@Override
-	public void setBeanFactory(BeanFactory beanFactory) {
-        AsyncAnnotationAdvisor advisor =  new AsyncAnnotationAdvisor(this.executor, this.exceptionHandler) {
+    @Override
+    public void setBeanFactory(BeanFactory beanFactory) {
+        AsyncAnnotationAdvisor advisor = new AsyncAnnotationAdvisor(this.executor, this.exceptionHandler) {
             @Override
             protected Advice buildAdvice(Executor executor, AsyncUncaughtExceptionHandler exceptionHandler) {
                 return new VaselineAsyncExecutionInterceptor(executor, exceptionHandler);
             }
         };
-		if (this.asyncAnnotationType != null) {
-			advisor.setAsyncAnnotationType(this.asyncAnnotationType);
-		}
-		advisor.setBeanFactory(beanFactory);
-		this.advisor = advisor;
-	}
+        if (this.asyncAnnotationType != null) {
+            advisor.setAsyncAnnotationType(this.asyncAnnotationType);
+        }
+        advisor.setBeanFactory(beanFactory);
+        this.advisor = advisor;
+    }
 
 }

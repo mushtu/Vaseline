@@ -25,7 +25,7 @@ public class PriorityExecutor
     }
 
     public PriorityExecutor(final ThreadFactory threadFactory,
-            final RejectedExecutionHandler handler) {
+                            final RejectedExecutionHandler handler) {
         super(0, Integer.MAX_VALUE, 60L, TimeUnit.SECONDS,
                 new PriorityBlockingQueue<Runnable>(11,
                         new PriorityTaskComparator()), threadFactory, handler);
@@ -42,7 +42,7 @@ public class PriorityExecutor
 
     @Override
     protected <T> RunnableFuture<T> newTaskFor(final Runnable runnable,
-            final T value) {
+                                               final T value) {
         if (runnable instanceof Important)
             return new PriorityTask<T>(((Important) runnable).getPriority(),
                     runnable, value);
@@ -66,7 +66,7 @@ public class PriorityExecutor
         }
 
         public PriorityTask(final int priority, final Runnable runnable,
-                final T result) {
+                            final T result) {
             super(runnable, result);
 
             this.priority = priority;

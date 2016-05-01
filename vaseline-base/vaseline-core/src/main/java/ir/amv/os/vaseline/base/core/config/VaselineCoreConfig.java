@@ -16,13 +16,9 @@ import org.springframework.context.annotation.PropertySource;
 public class VaselineCoreConfig implements ApplicationContextAware {
     private static ApplicationContext applicationContext;
 
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        this.applicationContext = applicationContext;
-    }
-
     /**
      * returns bean of <code>beanClass</code>
+     *
      * @param beanClass
      * @param <T>
      * @return
@@ -30,5 +26,10 @@ public class VaselineCoreConfig implements ApplicationContextAware {
      */
     public static <T> T getBean(Class<T> beanClass) {
         return applicationContext.getBean(beanClass);
+    }
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this.applicationContext = applicationContext;
     }
 }

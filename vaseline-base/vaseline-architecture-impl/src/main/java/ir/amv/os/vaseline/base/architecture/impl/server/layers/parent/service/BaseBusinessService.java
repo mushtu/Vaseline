@@ -15,29 +15,29 @@ import java.util.*;
 
 public class BaseBusinessService implements BusinessService {
 
-	protected Mapper mapper;
-	protected Validator validator;
-	protected ICoreExceptionHandler coreExceptionHandler;
-	
-	protected <S, D> D convert(S source, Class<D> destinationClass) throws VaselineConvertException {
-		// if (source instanceof BaseEntity<?> && hasLazyProp()) {
-		// BaseEntity<?> ent = (BaseEntity<?>) source;
-		// lazyProxyRemover.removeProxy(ent);
-		// }
-		if (source != null) {
-			Set<ConstraintViolation<S>> validate = validator.validate(source);
-			if (!validate.isEmpty()) {
-				throw new VaselineConvertException(new HashSet<ConstraintViolation<?>>(validate));
-			}
-		}
-		return source == null ? null : mapper.map(source, destinationClass);
-	}
+    protected Mapper mapper;
+    protected Validator validator;
+    protected ICoreExceptionHandler coreExceptionHandler;
 
-	protected <S, D> List<D> convertList(Collection<S> source,
-			Class<D> destinationClass) throws VaselineConvertException {
-		if (source == null) {
-			return null;
-		}
+    protected <S, D> D convert(S source, Class<D> destinationClass) throws VaselineConvertException {
+        // if (source instanceof BaseEntity<?> && hasLazyProp()) {
+        // BaseEntity<?> ent = (BaseEntity<?>) source;
+        // lazyProxyRemover.removeProxy(ent);
+        // }
+        if (source != null) {
+            Set<ConstraintViolation<S>> validate = validator.validate(source);
+            if (!validate.isEmpty()) {
+                throw new VaselineConvertException(new HashSet<ConstraintViolation<?>>(validate));
+            }
+        }
+        return source == null ? null : mapper.map(source, destinationClass);
+    }
+
+    protected <S, D> List<D> convertList(Collection<S> source,
+                                         Class<D> destinationClass) throws VaselineConvertException {
+        if (source == null) {
+            return null;
+        }
         List<D> destList;
         if (source instanceof IVaselineConvertableList) {
             IVaselineConvertableList convertableList = (IVaselineConvertableList) source;
@@ -46,31 +46,31 @@ public class BaseBusinessService implements BusinessService {
             destList = new ArrayList<D>();
         }
         for (S s : source) {
-			D convert = convert(s, destinationClass);
-			destList.add(convert);
-		}
-		return destList;
-	}
+            D convert = convert(s, destinationClass);
+            destList.add(convert);
+        }
+        return destList;
+    }
 
-	@Autowired
-	public void setMapper(Mapper mapper) {
-		this.mapper = mapper;
-	}
-	
-	@Autowired
+    @Autowired
+    public void setMapper(Mapper mapper) {
+        this.mapper = mapper;
+    }
+
+    @Autowired
     @Qualifier("getValidatorFactory")
-	public void setValidator(Validator validator) {
-		this.validator = validator;
-	}
-	
-	@Autowired
-	public void setCoreExceptionHandler(
-			ICoreExceptionHandler coreExceptionHandler) {
-		this.coreExceptionHandler = coreExceptionHandler;
-	}
+    public void setValidator(Validator validator) {
+        this.validator = validator;
+    }
 
-	protected BaseVaselineClientException convertException(Exception e) {
-		return coreExceptionHandler.convertException(e);
-	}
+    @Autowired
+    public void setCoreExceptionHandler(
+            ICoreExceptionHandler coreExceptionHandler) {
+        this.coreExceptionHandler = coreExceptionHandler;
+    }
+
+    protected BaseVaselineClientException convertException(Exception e) {
+        return coreExceptionHandler.convertException(e);
+    }
 
 }

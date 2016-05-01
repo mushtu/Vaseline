@@ -4,5 +4,5 @@ import java.util.Date;
 
 public interface IBaseDateProvider {
 
-	Date getCurrentDate();
+    Date getCurrentDate();
 }

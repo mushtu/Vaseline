@@ -20,13 +20,13 @@ public class VaselineHibernateConfigurerDelegate implements VaselineHibernateCon
 
     @Override
     public void configurePackagesToScan(List<String> packages) {
-        for(VaselineHibernateConfigurer configurer:delegates)
+        for (VaselineHibernateConfigurer configurer : delegates)
             configurer.configurePackagesToScan(packages);
     }
 
     @Override
     public void configureResourceLocations(List<Resource> resources) {
-        for(VaselineHibernateConfigurer configurer:delegates)
+        for (VaselineHibernateConfigurer configurer : delegates)
             configurer.configureResourceLocations(resources);
     }
 

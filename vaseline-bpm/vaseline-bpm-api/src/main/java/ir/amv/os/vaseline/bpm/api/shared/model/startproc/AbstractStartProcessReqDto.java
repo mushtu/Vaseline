@@ -11,10 +11,10 @@ import java.util.Map;
  */
 public abstract class AbstractStartProcessReqDto extends BaseBpmRequestDto {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	public abstract String getProcessDefinitionKey();
+    public abstract String getProcessDefinitionKey();
 
-	public abstract Map<String, Object> getVariablesMap();
+    public abstract Map<String, Object> getVariablesMap();
 
 }

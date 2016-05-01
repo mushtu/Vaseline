@@ -10,5 +10,6 @@ import java.io.Serializable;
 public interface IBaseBpmEntity<Id extends Serializable> extends Identifiable<Id> {
 
     Boolean getInProgress();
+
     void setInProgress(Boolean inProgress);
 }

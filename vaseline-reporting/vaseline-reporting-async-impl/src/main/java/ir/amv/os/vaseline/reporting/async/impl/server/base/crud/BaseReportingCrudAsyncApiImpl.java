@@ -25,7 +25,7 @@ import java.util.List;
  */
 public class BaseReportingCrudAsyncApiImpl<E extends Identifiable<Id>, D extends IBaseDto<Id>, Id extends Serializable, DAO extends CrudDao<E, D, Id>>
         extends BaseCrudDai<E, D, Id, DAO>
-        implements IBaseReportingCrudAsyncApi<E, D, Id>{
+        implements IBaseReportingCrudAsyncApi<E, D, Id> {
 
     private ICreateReportApi createReportApi;
     private IAuthenticationApi authenticationApi;

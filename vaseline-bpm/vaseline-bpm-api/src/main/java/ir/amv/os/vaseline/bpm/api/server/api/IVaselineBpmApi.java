@@ -26,33 +26,40 @@ public interface IVaselineBpmApi
 //    DeployResourceResponseServer deployResources(DeployResourceRequestServer deployRequest) throws BaseBusinessException;
 
     StartProcessResultServer startProcess(StartProcessReqServer req) throws BaseVaselineServerException;
+
     GoToTaskFormRespServer goToTaskForm(GoToTaskFormReqServer req) throws BaseVaselineServerException;
+
     CompleteTaskResponseServer completeTask(CompleteTaskRequestServer req) throws BaseVaselineServerException;
 
     InputStream getProcessImage(String taskId, boolean showAllTasks) throws BaseVaselineServerException;
 
     boolean claim(String taskId) throws BaseVaselineServerException;
+
     void setVariable(String taskId, String variableName, Serializable value) throws BaseVaselineServerException;
+
     <TaskBean extends ITaskBean<?, ?>> TaskBean getTaskBean(String taskId);
 
     List<String> getDecisionsForTask(String taskId);
 
     // Cartable Start
     List<Task> getPersonalTaskList(PagingDto paginationDTO) throws BaseVaselineServerException;
-    Long countPersonalTaskList() throws BaseVaselineServerException	;
+
+    Long countPersonalTaskList() throws BaseVaselineServerException;
+
     List<Task> getCandidateUserTaskList(PagingDto paginationDTO) throws BaseVaselineServerException;
 
-    Long countCandidateUserTaskList() throws BaseVaselineServerException	;
+    Long countCandidateUserTaskList() throws BaseVaselineServerException;
     // Cartable End
 
     void deploy(String name, String def);
-    void deploy(String resourceName,InputStream inputStream);
+
+    void deploy(String resourceName, InputStream inputStream);
 
     List<String> getActiveActivityIds(String executionId);
 
     Map<String, Object> getProcessVariables(String processInstanceId);
 
-    Map<String,Object> getProcessVariablesByTaskId(String taskId);
+    Map<String, Object> getProcessVariablesByTaskId(String taskId);
 
     boolean isProcessExist(String processId);
 

@@ -286,13 +286,13 @@ public class VaselineBpmApiImpl
     @Override
     @Transactional
     public void deploy(String name, String def) {
-        repositoryService.createDeployment().addString(name,def).deploy();
+        repositoryService.createDeployment().addString(name, def).deploy();
     }
 
     @Override
     @Transactional
-    public void deploy(String resourceName,InputStream inputStream) {
-        repositoryService.createDeployment().addInputStream(resourceName,inputStream).deploy();
+    public void deploy(String resourceName, InputStream inputStream) {
+        repositoryService.createDeployment().addInputStream(resourceName, inputStream).deploy();
     }
 
     @Override

@@ -64,12 +64,12 @@ public class BaseReadOnlyDai<E extends Identifiable<Id>, D extends IBaseDto<Id>,
         return BaseReadOnlyDaiHelper.searchByExample(this, getDao(), example, pagingDto);
     }
 
+    public DAO getDao() {
+        return dao;
+    }
+
     @Autowired
     public void setDao(DAO dao) {
         this.dao = dao;
-    }
-
-    public DAO getDao() {
-        return dao;
     }
 }

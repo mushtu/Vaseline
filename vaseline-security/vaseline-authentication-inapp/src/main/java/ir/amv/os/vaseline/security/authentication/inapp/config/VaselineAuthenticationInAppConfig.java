@@ -32,10 +32,10 @@ public class VaselineAuthenticationInAppConfig {
                     http.formLogin()
                             .loginPage("/login.html")
                             .loginProcessingUrl("/login.do")
-    //                .successHandler(authenticationSuccessRedirect())
-    //				.defaultSuccessUrl("/login.success", true)
+                            //                .successHandler(authenticationSuccessRedirect())
+                            //				.defaultSuccessUrl("/login.success", true)
                             //	.failureUrl("/login?err=1")
-    //                .failureHandler(authenticationFailureRedirect())
+                            //                .failureHandler(authenticationFailureRedirect())
                             .usernameParameter("username")
                             .passwordParameter("password")
 

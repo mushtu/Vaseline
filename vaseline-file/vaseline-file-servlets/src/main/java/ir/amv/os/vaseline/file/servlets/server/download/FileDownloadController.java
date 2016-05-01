@@ -16,40 +16,39 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class FileDownloadController {
 
-	private static final Logger logger = LoggerFactory
-			.getLogger(FileDownloadController.class);
+    private static final Logger logger = LoggerFactory
+            .getLogger(FileDownloadController.class);
 
-	private static final String CONTENT_DISPOSITION = "Content-Disposition";
+    private static final String CONTENT_DISPOSITION = "Content-Disposition";
 
-	private IFileApi fileApi;
+    private IFileApi fileApi;
 
-	/**
-	 * Upload single file using Spring Controller
-	 * 
-	 */
-	@RequestMapping(value = "/file/downloadFile", method = RequestMethod.GET)
-	public void uploadFileHandler(
-			@RequestParam(value = "fileId") String fileIdStr,
-			@RequestParam(required = false, value = "category", defaultValue = IFileApi.DEFAULT_CATEGORY) String category,
-			HttpServletResponse response) {
-		try {
-			final Long fileId = Long.parseLong(fileIdStr);
-			IFileEntity byId = fileApi.getById(category, fileId);
+    /**
+     * Upload single file using Spring Controller
+     */
+    @RequestMapping(value = "/file/downloadFile", method = RequestMethod.GET)
+    public void uploadFileHandler(
+            @RequestParam(value = "fileId") String fileIdStr,
+            @RequestParam(required = false, value = "category", defaultValue = IFileApi.DEFAULT_CATEGORY) String category,
+            HttpServletResponse response) {
+        try {
+            final Long fileId = Long.parseLong(fileIdStr);
+            IFileEntity byId = fileApi.getById(category, fileId);
 
-			String contentType = byId.getContentType();
-			response.setContentType(contentType);
-			ServletOutputStream outputStream = response.getOutputStream();
-			fileApi.writeFileContent(category, fileId, outputStream);
-			response.setHeader(CONTENT_DISPOSITION, "attachment; filename="
-					+ byId.getFileName());
-			response.flushBuffer();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+            String contentType = byId.getContentType();
+            response.setContentType(contentType);
+            ServletOutputStream outputStream = response.getOutputStream();
+            fileApi.writeFileContent(category, fileId, outputStream);
+            response.setHeader(CONTENT_DISPOSITION, "attachment; filename="
+                    + byId.getFileName());
+            response.flushBuffer();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-	@Autowired
-	public void setFileApi(IFileApi fileApi) {
-		this.fileApi = fileApi;
-	}
+    @Autowired
+    public void setFileApi(IFileApi fileApi) {
+        this.fileApi = fileApi;
+    }
 }

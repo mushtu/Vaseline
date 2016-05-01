@@ -14,7 +14,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 @Component
 public class VaselineReportPriotorizer
-        implements IBaseVaselineAsyncPrioritorizer{
+        implements IBaseVaselineAsyncPrioritorizer {
     @Override
     public int getPriority(MethodInvocation methodInvocation) {
         Object[] arguments = methodInvocation.getArguments();
@@ -36,7 +36,7 @@ public class VaselineReportPriotorizer
                 if (count / (1 * 1000 * 1000) == 0) {
                     return 10;
                 }
-                return  0;
+                return 0;
             }
         }
         return 0;

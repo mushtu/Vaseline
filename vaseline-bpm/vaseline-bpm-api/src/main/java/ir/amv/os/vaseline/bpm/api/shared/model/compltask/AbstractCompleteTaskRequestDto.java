@@ -7,33 +7,30 @@ import java.util.Map;
 
 public abstract class AbstractCompleteTaskRequestDto extends BaseBpmRequestDto {
 
-	private static final long serialVersionUID = 1L;
-	
-	private String description;
-	private String taskId;
-	protected Map<String,Object> variablesMap = new HashMap<String, Object>();
+    private static final long serialVersionUID = 1L;
+    protected Map<String, Object> variablesMap = new HashMap<String, Object>();
+    private String description;
+    private String taskId;
 
+    public String getTaskId() {
+        return taskId;
+    }
 
-	public String getTaskId() {
-		return taskId;
-	}
+    public void setTaskId(String taskId) {
+        this.taskId = taskId;
+    }
 
-	public void setTaskId(String taskId) {
-		this.taskId = taskId;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public abstract Map<String, Object> getVariables();
 
-	public abstract Map<String, Object> getVariables();
-
-	public void addVariable(String key, Object object)
-	{
-		variablesMap.put(key,object);
-	}
+    public void addVariable(String key, Object object) {
+        variablesMap.put(key, object);
+    }
 }

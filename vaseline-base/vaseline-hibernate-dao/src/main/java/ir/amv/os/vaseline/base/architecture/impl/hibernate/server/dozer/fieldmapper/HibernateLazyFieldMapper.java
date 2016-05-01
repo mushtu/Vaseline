@@ -9,18 +9,18 @@ import org.springframework.stereotype.Component;
 @Component
 public class HibernateLazyFieldMapper implements CustomFieldMapper {
 
-	@Override
-	public boolean mapField(Object source, Object destination,
-			Object sourceFieldValue, ClassMap classMap, FieldMap fieldMapping) {
-		boolean shouldBeSetAsNull = !HibernateUtils.isLazyObjectInitialized(sourceFieldValue);
+    @Override
+    public boolean mapField(Object source, Object destination,
+                            Object sourceFieldValue, ClassMap classMap, FieldMap fieldMapping) {
+        boolean shouldBeSetAsNull = !HibernateUtils.isLazyObjectInitialized(sourceFieldValue);
 
-		if (shouldBeSetAsNull) {
-			// Set destination to null, and tell dozer that the field is mapped
-			destination = null;
-			return true;
-		} else {
-			// Allow dozer to map as normal
-			return false;
-		}
-	}
+        if (shouldBeSetAsNull) {
+            // Set destination to null, and tell dozer that the field is mapped
+            destination = null;
+            return true;
+        } else {
+            // Allow dozer to map as normal
+            return false;
+        }
+    }
 }

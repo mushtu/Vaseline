@@ -17,7 +17,7 @@ public class VaselineJsonConfigurerDelegate implements VaselineJsonConfigurer {
 
     @Override
     public GraphAdapterBuilder configureGraphAdapterBuilder(GraphAdapterBuilder graphAdapterBuilder) {
-        for(VaselineJsonConfigurer configurer:delegates)
+        for (VaselineJsonConfigurer configurer : delegates)
             configurer.configureGraphAdapterBuilder(graphAdapterBuilder);
         return graphAdapterBuilder;
     }

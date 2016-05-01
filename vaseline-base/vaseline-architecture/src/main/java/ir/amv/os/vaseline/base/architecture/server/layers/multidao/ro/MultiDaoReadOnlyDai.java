@@ -1,7 +1,7 @@
 package ir.amv.os.vaseline.base.architecture.server.layers.multidao.ro;
 
-import ir.amv.os.vaseline.base.architecture.server.layers.ent.ro.dai.EntityReadOnlyDai;
 import ir.amv.os.vaseline.base.architecture.server.layers.base.ro.dao.ReadOnlyDao;
+import ir.amv.os.vaseline.base.architecture.server.layers.ent.ro.dai.EntityReadOnlyDai;
 import ir.amv.os.vaseline.base.core.server.base.ent.Identifiable;
 import ir.amv.os.vaseline.base.core.server.base.exc.BaseVaselineServerException;
 import ir.amv.os.vaseline.base.core.shared.base.dto.base.IBaseDto;
@@ -19,11 +19,15 @@ public interface MultiDaoReadOnlyDai<E extends Identifiable<Id>, D extends IBase
     E getById(String coreId, Id id) throws BaseVaselineServerException;
 
     Long countAll(String coreId) throws BaseVaselineServerException;
+
     List<E> getAll(String coreId) throws BaseVaselineServerException;
+
     List<E> getAll(String coreId, PagingDto pagingDto) throws BaseVaselineServerException;
 
     Long countByExample(String coreId, D example) throws BaseVaselineServerException;
+
     List<E> searchByExample(String coreId, D example) throws BaseVaselineServerException;
+
     List<E> searchByExample(String coreId, D example, PagingDto pagingDto)
             throws BaseVaselineServerException;
 

@@ -41,7 +41,7 @@ public class FileBlobDaoImpl
             session.beginTransaction();
             LobHelper lobHelper = session.getLobHelper();
             Blob dataBlob = lobHelper.createBlob(inputStream, dataSize);
-            ((FileBlobEntity)fileEntity).setFileContent(dataBlob);
+            ((FileBlobEntity) fileEntity).setFileContent(dataBlob);
             Serializable id = session.save(fileEntity);
             session.getTransaction().commit();
             session.close();

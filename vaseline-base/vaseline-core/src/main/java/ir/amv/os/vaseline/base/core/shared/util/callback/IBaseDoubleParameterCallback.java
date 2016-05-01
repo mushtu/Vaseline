@@ -6,5 +6,6 @@ package ir.amv.os.vaseline.base.core.shared.util.callback;
 public interface IBaseDoubleParameterCallback<T1, T2, F> {
 
     void onSuccess(T1 firstParam, T2 secondParameter);
+
     void onFailure(F failure);
 }

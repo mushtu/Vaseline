@@ -6,5 +6,6 @@ package ir.amv.os.vaseline.base.core.server.proxyaware;
 public interface IProxyAware {
 
     <Proxy> Proxy getProxy(Class<Proxy> proxyClass);
+
     <Proxy> void setProxy(Proxy proxy);
 }

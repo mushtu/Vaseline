@@ -9,5 +9,6 @@ import java.lang.annotation.RetentionPolicy;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface JsonParam {
     String paramName();
+
     Class<?> paramType();
 }

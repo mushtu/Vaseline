@@ -10,14 +10,15 @@ import java.util.Map;
 
 public interface ITaskBean<GoToTaskFormResp extends GoToTaskFormRespDto, CompleteTaskReq extends CompleteTaskRequestServer> {
 
-	String getEventName();
+    String getEventName();
 
-	Map<String, Object> getFormVariables(GoToTaskFormReqServer request) throws BaseVaselineServerException;
+    Map<String, Object> getFormVariables(GoToTaskFormReqServer request) throws BaseVaselineServerException;
 
-	Map<String, Object> complete(CompleteTaskReq request) throws BaseVaselineServerException;
+    Map<String, Object> complete(CompleteTaskReq request) throws BaseVaselineServerException;
 
-	Class<GoToTaskFormResp> getGoToTaskFormRespClass();
-	Class<CompleteTaskReq> getCompleteTaskReqClass();
+    Class<GoToTaskFormResp> getGoToTaskFormRespClass();
+
+    Class<CompleteTaskReq> getCompleteTaskReqClass();
 
     void setTask(Task task);
 }

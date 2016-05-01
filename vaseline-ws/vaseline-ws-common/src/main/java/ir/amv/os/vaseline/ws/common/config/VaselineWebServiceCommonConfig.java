@@ -9,7 +9,7 @@ import org.springframework.context.annotation.ImportResource;
  * Created by AMV on 2/13/2016.
  */
 @Configuration
-@ImportResource({ "classpath:META-INF/cxf/cxf.xml" })
+@ImportResource({"classpath:META-INF/cxf/cxf.xml"})
 public class VaselineWebServiceCommonConfig {
 
     @Bean(destroyMethod = "shutdown")

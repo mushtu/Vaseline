@@ -68,7 +68,7 @@ public class BaseCrudDaiHelper {
     }
 
     public static <E extends Identifiable<Id>, D extends IBaseDto<Id>, Id extends Serializable>
-            void delete(
+    void delete(
             EntityCrudDai<E> api,
             CrudDao<E, D, Id> dao,
             E entity)
@@ -79,7 +79,7 @@ public class BaseCrudDaiHelper {
     }
 
     public static <E extends Identifiable<Id>, D extends IBaseDto<Id>, Id extends Serializable>
-            void deleteBatch(
+    void deleteBatch(
             EntityCrudDai<E> api,
             CrudDao<E, D, Id> dao,
             List<E> entities)
@@ -92,7 +92,7 @@ public class BaseCrudDaiHelper {
     }
 
     public static <E extends Identifiable<Id>, D extends IBaseDto<Id>, Id extends Serializable>
-            void delete(
+    void delete(
             EntityCrudDai<E> api,
             CrudDao<E, D, Id> dao,
             Id id)

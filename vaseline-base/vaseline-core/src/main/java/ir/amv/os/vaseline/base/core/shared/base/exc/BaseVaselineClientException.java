@@ -3,25 +3,25 @@ package ir.amv.os.vaseline.base.core.shared.base.exc;
 import java.io.Serializable;
 
 public class BaseVaselineClientException extends Exception implements
-		Serializable {
-	
-	private static final long serialVersionUID = 1L;
-	
-	private String identifier;
+        Serializable {
 
-	public BaseVaselineClientException() {
-	}
+    private static final long serialVersionUID = 1L;
 
-	public BaseVaselineClientException(String messageKey) {
-		super(messageKey);
-	}
+    private String identifier;
 
-	public String getIdentifier() {
-		return identifier;
-	}
+    public BaseVaselineClientException() {
+    }
 
-	public void setIdentifier(String identifier) {
-		this.identifier = identifier;
-	}
+    public BaseVaselineClientException(String messageKey) {
+        super(messageKey);
+    }
+
+    public String getIdentifier() {
+        return identifier;
+    }
+
+    public void setIdentifier(String identifier) {
+        this.identifier = identifier;
+    }
 
 }

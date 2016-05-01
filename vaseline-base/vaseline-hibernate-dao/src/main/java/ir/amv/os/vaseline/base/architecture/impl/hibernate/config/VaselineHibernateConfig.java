@@ -34,7 +34,7 @@ import java.util.Properties;
 @Configuration
 @EnableTransactionManagement
 @ComponentScan("ir.amv.os.vaseline.base.architecture.impl.hibernate.server")
-@Import( {
+@Import({
         VaselineJdbcConfig.class,
         VaselineCachingConfig.class
 })
@@ -52,7 +52,6 @@ public class VaselineHibernateConfig implements InitializingBean {
     public void afterPropertiesSet() throws Exception {
         configurerDelegate = new VaselineHibernateConfigurerDelegate(configurers);
     }
-
 
 
     @Bean
@@ -106,7 +105,6 @@ public class VaselineHibernateConfig implements InitializingBean {
     }
 
 
-
     private Properties additionalProperties() {
         Properties properties = new Properties();
         properties.put("hibernate.validator.apply_to_ddl", "false");
@@ -120,9 +118,9 @@ public class VaselineHibernateConfig implements InitializingBean {
         properties.put("hibernate.format_sql", "true");
         properties.put("hibernate.connection.autocommit", "false");
         if (environment.acceptsProfiles("initDB")) {
-            properties.put("hibernate.hbm2ddl.auto","create-drop");
+            properties.put("hibernate.hbm2ddl.auto", "create-drop");
         } else {
-            properties.put("hibernate.hbm2ddl.auto","update");
+            properties.put("hibernate.hbm2ddl.auto", "update");
         }
 
         properties.put("hibernate.cache.use_second_level_cache", "true");

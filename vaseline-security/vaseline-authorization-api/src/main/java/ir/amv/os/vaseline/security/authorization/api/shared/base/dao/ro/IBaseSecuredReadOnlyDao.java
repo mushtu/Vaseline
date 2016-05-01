@@ -16,14 +16,19 @@ public interface IBaseSecuredReadOnlyDao<E extends Identifiable<Id>, D extends I
         extends ReadOnlyDao<E, D, Id> {
 
     E getById(Id id, SecurityCriteria securityCriteria);
+
     E getByIdDetached(Id id, SecurityCriteria securityCriteria);
 
     Long countAll(SecurityCriteria securityCriteria);
+
     List<E> getAll(SecurityCriteria securityCriteria);
+
     List<E> getAll(PagingDto pagingDto, SecurityCriteria securityCriteria);
 
     Long countByExample(D example, SecurityCriteria securityCriteria);
+
     List<E> searchByExample(D example, SecurityCriteria securityCriteria);
+
     List<E> searchByExample(D example, PagingDto pagingDto, SecurityCriteria securityCriteria);
 
 }

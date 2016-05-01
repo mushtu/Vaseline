@@ -11,5 +11,6 @@ import java.lang.annotation.RetentionPolicy;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Prioritorized {
     int value() default 0;
+
     Class<? extends IBaseVaselineAsyncPrioritorizer> prioritorizerClass() default IBaseVaselineAsyncPrioritorizer.class;
 }

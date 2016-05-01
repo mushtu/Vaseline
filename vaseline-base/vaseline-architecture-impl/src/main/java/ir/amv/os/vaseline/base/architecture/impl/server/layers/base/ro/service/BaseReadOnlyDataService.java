@@ -2,7 +2,7 @@ package ir.amv.os.vaseline.base.architecture.impl.server.layers.base.ro.service;
 
 import ir.amv.os.vaseline.base.architecture.impl.server.layers.parent.service.BaseBusinessService;
 import ir.amv.os.vaseline.base.architecture.server.layers.base.ro.dai.ReadOnlyDai;
-import ir.amv.os.vaseline.base.architecture.server.layers.base.ro.service.ReadOnlyService;
+import ir.amv.os.vaseline.base.architecture.server.layers.base.ro.service.ReadOnlyDataService;
 import ir.amv.os.vaseline.base.core.server.base.ent.Identifiable;
 import ir.amv.os.vaseline.base.core.shared.base.dto.base.IBaseDto;
 import ir.amv.os.vaseline.base.core.shared.base.dto.paging.PagingDto;
@@ -20,7 +20,7 @@ import java.util.List;
  */
 public class BaseReadOnlyDataService<E extends Identifiable<Id>, D extends IBaseDto<Id>, Id extends Serializable, API extends ReadOnlyDai<E, D, Id>>
         extends BaseBusinessService
-        implements ReadOnlyService<D, Id> {
+        implements ReadOnlyDataService<D, Id> {
 
     protected API api;
     protected Class<E> entityClass;

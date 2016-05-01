@@ -4,9 +4,9 @@ import java.util.Date;
 
 public class DefaultDateProvider implements IBaseDateProvider {
 
-	@Override
-	public Date getCurrentDate() {
-		return new Date();
-	}
+    @Override
+    public Date getCurrentDate() {
+        return new Date();
+    }
 
 }

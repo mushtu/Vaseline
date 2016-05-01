@@ -19,7 +19,7 @@ import java.util.Map;
  */
 @Configuration
 @EnableCaching
-public class VaselineCachingConfig implements CachingConfigurer, ApplicationContextAware{
+public class VaselineCachingConfig implements CachingConfigurer, ApplicationContextAware {
 
     private ApplicationContext applicationContext;
 

@@ -14,7 +14,8 @@ public class ProxyAwareBeanPostProcessor implements BeanPostProcessor, Ordered {
     private int order = Ordered.LOWEST_PRECEDENCE;
 
 
-    public ProxyAwareBeanPostProcessor() {}
+    public ProxyAwareBeanPostProcessor() {
+    }
 
 
     @Override

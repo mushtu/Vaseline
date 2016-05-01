@@ -6,22 +6,22 @@ import java.util.Map;
 
 public class StartProcessReqServer extends BaseBpmRequestServer {
 
-	private String processDefinitionKey;
-	private Map<String, Object> variablesMap;
+    private String processDefinitionKey;
+    private Map<String, Object> variablesMap;
 
-	public String getProcessDefinitionKey() {
-		return processDefinitionKey;
-	}
+    public String getProcessDefinitionKey() {
+        return processDefinitionKey;
+    }
 
-	public void setProcessDefinitionKey(String processDefinitionKey) {
-		this.processDefinitionKey = processDefinitionKey;
-	}
+    public void setProcessDefinitionKey(String processDefinitionKey) {
+        this.processDefinitionKey = processDefinitionKey;
+    }
 
-	public Map<String, Object> getVariablesMap() {
-		return variablesMap;
-	}
+    public Map<String, Object> getVariablesMap() {
+        return variablesMap;
+    }
 
-	public void setVariablesMap(Map<String, Object> variablesMap) {
-		this.variablesMap = variablesMap;
-	}
+    public void setVariablesMap(Map<String, Object> variablesMap) {
+        this.variablesMap = variablesMap;
+    }
 }

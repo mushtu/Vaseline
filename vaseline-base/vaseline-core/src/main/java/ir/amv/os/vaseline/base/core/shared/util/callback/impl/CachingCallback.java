@@ -6,7 +6,7 @@ import ir.amv.os.vaseline.base.core.shared.util.callback.IBaseCallback;
  * Created by AMV on 2/29/2016.
  */
 public abstract class CachingCallback<T>
-        extends BaseCallbackImpl<IBaseCallback<T, Void>, Void>{
+        extends BaseCallbackImpl<IBaseCallback<T, Void>, Void> {
 
     private T value;
 

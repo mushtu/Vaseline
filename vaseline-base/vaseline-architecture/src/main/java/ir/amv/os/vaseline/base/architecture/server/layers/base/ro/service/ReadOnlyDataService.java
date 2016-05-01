@@ -17,12 +17,16 @@ public interface ReadOnlyDataService<D extends IBaseDto<Id>, Id extends Serializ
     D getById(Id id) throws BaseVaselineClientException;
 
     Long countAll() throws BaseVaselineClientException;
+
     List<D> getAll() throws BaseVaselineClientException;
+
     List<D> getAll(PagingDto pagingDto) throws BaseVaselineClientException;
 
 
     Long countByExample(D example) throws BaseVaselineClientException;
+
     List<D> searchByExample(D example) throws BaseVaselineClientException;
+
     List<D> searchByExample(D example, PagingDto pagingDto) throws BaseVaselineClientException;
 
 }

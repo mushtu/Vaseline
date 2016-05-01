@@ -2,9 +2,9 @@ package ir.amv.os.vaseline.file.api.impl.server.model.base;
 
 import ir.amv.os.vaseline.base.architecture.impl.server.layers.multidao.crud.dai.BaseMultiDaoCrudDai;
 import ir.amv.os.vaseline.base.core.server.base.exc.BaseVaselineServerException;
+import ir.amv.os.vaseline.file.api.server.daoregisterer.IFileDaoRegisterer;
 import ir.amv.os.vaseline.file.api.server.model.base.IFileApi;
 import ir.amv.os.vaseline.file.api.server.model.base.IFileDao;
-import ir.amv.os.vaseline.file.api.server.daoregisterer.IFileDaoRegisterer;
 import ir.amv.os.vaseline.file.api.server.model.base.IFileEntity;
 import ir.amv.os.vaseline.file.api.shared.model.base.IFileDto;
 import org.springframework.beans.factory.annotation.Autowired;

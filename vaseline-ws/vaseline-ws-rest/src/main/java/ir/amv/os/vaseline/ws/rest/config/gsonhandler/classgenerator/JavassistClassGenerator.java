@@ -4,8 +4,6 @@ import ir.amv.os.vaseline.ws.rest.server.multiparam.annot.JsonParam;
 import javassist.*;
 
 import java.io.IOException;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,10 +13,10 @@ import java.util.Map;
  */
 public class JavassistClassGenerator {
 
+    private static Map<String, Class<?>> classMap = new HashMap<String, Class<?>>();
+
     private JavassistClassGenerator() {
     }
-
-    private static Map<String, Class<?>> classMap = new HashMap<String, Class<?>>();
 
     public static Class<?> getClassForMultiParam(List<JsonParam> params) throws NotFoundException, CannotCompileException, IOException {
         String packageName = "";

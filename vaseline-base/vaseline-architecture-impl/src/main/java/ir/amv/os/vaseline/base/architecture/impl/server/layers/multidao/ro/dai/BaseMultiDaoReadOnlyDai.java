@@ -23,43 +23,43 @@ public abstract class BaseMultiDaoReadOnlyDai<E extends Identifiable<Id>, D exte
     protected List<DAO> daoList;
 
     @Override
-    @Transactional(readOnly =  true)
+    @Transactional(readOnly = true)
     public E getById(String coreId, Id id) throws BaseVaselineServerException {
         return BaseMultiDaoReadOnlyDaiHelper.getById(this, coreId, id);
     }
 
     @Override
-    @Transactional(readOnly =  true)
+    @Transactional(readOnly = true)
     public Long countAll(String coreId) throws BaseVaselineServerException {
         return BaseMultiDaoReadOnlyDaiHelper.countAll(this, coreId);
     }
 
     @Override
-    @Transactional(readOnly =  true)
+    @Transactional(readOnly = true)
     public List<E> getAll(String coreId) throws BaseVaselineServerException {
         return BaseMultiDaoReadOnlyDaiHelper.getAll(this, coreId);
     }
 
     @Override
-    @Transactional(readOnly =  true)
+    @Transactional(readOnly = true)
     public List<E> getAll(String coreId, PagingDto pagingDto) throws BaseVaselineServerException {
         return BaseMultiDaoReadOnlyDaiHelper.getAll(this, coreId, pagingDto);
     }
 
     @Override
-    @Transactional(readOnly =  true)
+    @Transactional(readOnly = true)
     public Long countByExample(String coreId, D example) throws BaseVaselineServerException {
         return BaseMultiDaoReadOnlyDaiHelper.countByExample(this, coreId, example);
     }
 
     @Override
-    @Transactional(readOnly =  true)
+    @Transactional(readOnly = true)
     public List<E> searchByExample(String coreId, D example) throws BaseVaselineServerException {
         return BaseMultiDaoReadOnlyDaiHelper.searchByExample(this, coreId, example);
     }
 
     @Override
-    @Transactional(readOnly =  true)
+    @Transactional(readOnly = true)
     public List<E> searchByExample(String coreId, D example, PagingDto pagingDto) throws BaseVaselineServerException {
         return BaseMultiDaoReadOnlyDaiHelper.searchByExample(this, coreId, example, pagingDto);
     }

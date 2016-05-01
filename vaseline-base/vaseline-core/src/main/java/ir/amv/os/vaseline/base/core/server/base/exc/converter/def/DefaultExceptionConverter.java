@@ -9,9 +9,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class DefaultExceptionConverter extends BaseExceptionConverterImpl<Exception, BaseVaselineClientException> {
 
-	@Autowired
-	public DefaultExceptionConverter(CoreExceptionHandlerImpl exceptionHandler) {
-		super(exceptionHandler);
-	}
+    @Autowired
+    public DefaultExceptionConverter(CoreExceptionHandlerImpl exceptionHandler) {
+        super(exceptionHandler);
+    }
 
 }

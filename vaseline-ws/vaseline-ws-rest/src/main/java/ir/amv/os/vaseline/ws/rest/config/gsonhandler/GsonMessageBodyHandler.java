@@ -22,31 +22,34 @@ import java.io.*;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Provider
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public final class GsonMessageBodyHandler implements MessageBodyWriter<Object>,
-		MessageBodyReader<Object>, ApplicationContextAware {
+        MessageBodyReader<Object>, ApplicationContextAware {
 
-	private static final String UTF_8 = "UTF-8";
-	private ApplicationContext applicationContext;
-	private Gson gson;
+    private static final String UTF_8 = "UTF-8";
+    private ApplicationContext applicationContext;
+    private Gson gson;
 
-	@Override
-	public boolean isReadable(Class<?> type, Type genericType,
-			Annotation[] annotations, MediaType mediaType) {
-		return true;
-	}
+    @Override
+    public boolean isReadable(Class<?> type, Type genericType,
+                              Annotation[] annotations, MediaType mediaType) {
+        return true;
+    }
 
-	@Override
-	public Object readFrom(Class<Object> type, Type genericType,
-			Annotation[] annotations, MediaType mediaType,
-			MultivaluedMap<String, String> httpHeaders, InputStream entityStream) {
-		InputStreamReader streamReader = null;
-		try {
-			streamReader = new InputStreamReader(entityStream, UTF_8);
+    @Override
+    public Object readFrom(Class<Object> type, Type genericType,
+                           Annotation[] annotations, MediaType mediaType,
+                           MultivaluedMap<String, String> httpHeaders, InputStream entityStream) {
+        InputStreamReader streamReader = null;
+        try {
+            streamReader = new InputStreamReader(entityStream, UTF_8);
             if (annotations.length > 0) {
                 JsonMultParam jsonParam = null;
                 for (Annotation annotation : annotations) {
@@ -68,78 +71,78 @@ public final class GsonMessageBodyHandler implements MessageBodyWriter<Object>,
                 return map;
             }
             Type jsonType;
-			if (type.equals(genericType)) {
-				jsonType = type;
-			} else {
-				jsonType = genericType;
-			}
-			return gson().fromJson(streamReader, jsonType);
+            if (type.equals(genericType)) {
+                jsonType = type;
+            } else {
+                jsonType = genericType;
+            }
+            return gson().fromJson(streamReader, jsonType);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-			try {
-				if (streamReader != null) {
-					streamReader.close();
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		return null;
-	}
+            try {
+                if (streamReader != null) {
+                    streamReader.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
 
-	private boolean isAnnotPresent(Annotation[] annotations, Class<?> annotClass) {
-		for (Annotation annotation : annotations) {
-			if (annotation.getClass().equals(annotClass)) {
-				return true;
-			}
-		}
-		return false;
-	}
+    private boolean isAnnotPresent(Annotation[] annotations, Class<?> annotClass) {
+        for (Annotation annotation : annotations) {
+            if (annotation.getClass().equals(annotClass)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public boolean isWriteable(Class<?> type, Type genericType,
-			Annotation[] annotations, MediaType mediaType) {
-		return true;
-	}
+    @Override
+    public boolean isWriteable(Class<?> type, Type genericType,
+                               Annotation[] annotations, MediaType mediaType) {
+        return true;
+    }
 
-	@Override
-	public long getSize(Object object, Class<?> type, Type genericType,
-			Annotation[] annotations, MediaType mediaType) {
-		return -1;
-	}
+    @Override
+    public long getSize(Object object, Class<?> type, Type genericType,
+                        Annotation[] annotations, MediaType mediaType) {
+        return -1;
+    }
 
-	@Override
-	public void writeTo(Object object, Class<?> type, Type genericType,
-			Annotation[] annotations, MediaType mediaType,
-			MultivaluedMap<String, Object> httpHeaders,
-			OutputStream entityStream) throws IOException,
-			WebApplicationException {
-		OutputStreamWriter writer = new OutputStreamWriter(entityStream, UTF_8);
-		try {
-			Type jsonType;
-			if (type.isAnnotationPresent(GsonIgnoreGenericType.class) || type.equals(genericType)) {
-				jsonType = type;
-			} else {
-				jsonType = genericType;
-			}
-			gson().toJson(object, jsonType, writer);
-		} finally {
-			writer.close();
-		}
-	}
+    @Override
+    public void writeTo(Object object, Class<?> type, Type genericType,
+                        Annotation[] annotations, MediaType mediaType,
+                        MultivaluedMap<String, Object> httpHeaders,
+                        OutputStream entityStream) throws IOException,
+            WebApplicationException {
+        OutputStreamWriter writer = new OutputStreamWriter(entityStream, UTF_8);
+        try {
+            Type jsonType;
+            if (type.isAnnotationPresent(GsonIgnoreGenericType.class) || type.equals(genericType)) {
+                jsonType = type;
+            } else {
+                jsonType = genericType;
+            }
+            gson().toJson(object, jsonType, writer);
+        } finally {
+            writer.close();
+        }
+    }
 
-	private Gson gson() {
-		if (gson == null) {
-			GsonBuilder gsonBuilder = applicationContext.getBean(GsonBuilder.class);
-			gson = gsonBuilder.create();
-		}
-		return gson;
-	}
+    private Gson gson() {
+        if (gson == null) {
+            GsonBuilder gsonBuilder = applicationContext.getBean(GsonBuilder.class);
+            gson = gsonBuilder.create();
+        }
+        return gson;
+    }
 
-	@Override
-	public void setApplicationContext(ApplicationContext applicationContext)
-			throws BeansException {
-		this.applicationContext = applicationContext;
-	}
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext)
+            throws BeansException {
+        this.applicationContext = applicationContext;
+    }
 }

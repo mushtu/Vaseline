@@ -12,5 +12,6 @@ public interface HasCreateDateEntity<Id extends Serializable>
         extends Identifiable<Id> {
 
     Date getCreateDate();
+
     void setCreateDate(Date createDate);
 }

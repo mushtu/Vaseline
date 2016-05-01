@@ -1,7 +1,6 @@
 package ir.amv.os.vaseline.reporting.api.server.model;
 
 import ir.amv.os.vaseline.base.core.server.base.exc.BaseVaselineServerException;
-import ir.amv.os.vaseline.reporting.api.server.model.IBaseReportSourceServer;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperReport;

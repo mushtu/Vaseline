@@ -15,17 +15,23 @@ public interface ReadOnlyDao<E extends Identifiable<Id>, D extends IBaseDto<Id>,
         extends DataAccessObject {
 
     E getById(Id id);
+
     E getByIdDetached(Id id);
 
     Long countAll();
+
     List<E> getAll();
+
     List<E> getAll(PagingDto pagingDto);
 
     Long countByExample(D example);
+
     List<E> searchByExample(D example);
+
     List<E> searchByExample(D example, PagingDto pagingDto);
 
-    void setEntityClass(Class<E> entityClass);
     Class<E> getEntityClass();
+
+    void setEntityClass(Class<E> entityClass);
 
 }

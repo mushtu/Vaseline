@@ -23,8 +23,7 @@ public class VaselineRestConfiguration {
         return providers;
     }
 
-    public void addProvider(Object provider)
-    {
+    public void addProvider(Object provider) {
         providers.add(provider);
     }
 

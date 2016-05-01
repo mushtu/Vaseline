@@ -4,7 +4,8 @@ import java.util.List;
 
 public interface IExcludeRestServiceFilter {
 
-	List<String> excludedBeanNames();
-	List<Class<?>> excludedBeanClasses();
-	
+    List<String> excludedBeanNames();
+
+    List<Class<?>> excludedBeanClasses();
+
 }

@@ -8,7 +8,7 @@ import java.util.concurrent.Callable;
  * Created by AMV on 2/29/2016.
  */
 public abstract class PriorityCallable
-        implements Callable<Object>, PriorityExecutor.Important{
+        implements Callable<Object>, PriorityExecutor.Important {
 
     private int priority;
 

@@ -2,12 +2,12 @@ package ir.amv.os.vaseline.base.json.config;
 
 import com.google.gson.*;
 import ir.amv.os.vaseline.base.core.config.VaselineCoreConfig;
+import ir.amv.os.vaseline.base.core.server.polymorphysm.IVaselinePolymorphysmClassHolder;
+import ir.amv.os.vaseline.base.core.server.polymorphysm.impl.VaselinePolymorphysmClassHolderImpl;
 import ir.amv.os.vaseline.base.core.shared.util.reflection.ReflectionUtil;
 import ir.amv.os.vaseline.base.json.server.GraphAdapterBuilder;
 import ir.amv.os.vaseline.base.json.server.annot.ExcludeFromJson;
 import ir.amv.os.vaseline.base.json.server.polymorphysm.GsonPolymorphysmSerializerAndDeserializer;
-import ir.amv.os.vaseline.base.core.server.polymorphysm.IVaselinePolymorphysmClassHolder;
-import ir.amv.os.vaseline.base.core.server.polymorphysm.impl.VaselinePolymorphysmClassHolderImpl;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
@@ -24,7 +24,7 @@ import java.util.Map;
 @Configuration
 @Import(VaselineCoreConfig.class)
 @ComponentScan("ir.amv.os.vaseline.base.json.server")
-public class VaselineJsonConfig implements InitializingBean{
+public class VaselineJsonConfig implements InitializingBean {
 
     @Autowired(required = false)
     List<VaselineJsonConfigurer> configurers = Collections.emptyList();
@@ -117,8 +117,6 @@ public class VaselineJsonConfig implements InitializingBean{
         // gsonLazySerializer);
         return gsonBuilder;
     }
-
-
 
 
     @Bean(name = "vaselinePolymorphysmSerializerAndDeserializer")

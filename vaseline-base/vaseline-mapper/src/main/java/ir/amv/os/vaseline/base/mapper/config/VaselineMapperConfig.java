@@ -6,9 +6,7 @@ import ir.amv.os.vaseline.base.mapper.config.custconv.IVaselineCustomConverterCl
 import ir.amv.os.vaseline.base.mapper.config.fieldmapper.VaselineCustomFieldMapper;
 import ir.amv.os.vaseline.base.mapper.server.annot.ExcludeFromDozer;
 import ir.amv.os.vaseline.base.mapper.server.annot.VaselineMapTo;
-import org.dozer.CustomConverter;
 import org.dozer.CustomFieldMapper;
-import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.dozer.classmap.ClassMap;
 import org.dozer.fieldmap.FieldMap;
@@ -20,7 +18,6 @@ import javax.xml.bind.annotation.XmlSeeAlso;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by AMV on 2/3/2016.
@@ -65,22 +62,6 @@ public class VaselineMapperConfig {
         return dozerBeanMapper;
     }
 
-    public static class VaselineMappingBuilder extends BeanMappingBuilder {
-        private Class<?> sourceClass;
-        private Class<?> destinationClass;
-        private TypeMappingOption[] options;
-
-        public VaselineMappingBuilder(Class<?> sourceClass, Class<?> destinationClass, TypeMappingOption... options) {
-            this.sourceClass = sourceClass;
-            this.destinationClass = destinationClass;
-            this.options = options;
-        }
-
-        @Override
-        protected void configure() {
-            mapping(sourceClass, destinationClass, options);
-        }
-    }
     private void addMappingsFor(List<BeanMappingBuilder> mappings, Class<?> parentClass) {
         VaselineMapTo vaselineMapTo = parentClass.getAnnotation(VaselineMapTo.class);
         if (vaselineMapTo != null) {
@@ -102,5 +83,22 @@ public class VaselineMapperConfig {
     @Bean
     public VaselineCustomFieldMapper customFieldMapper(List<CustomFieldMapper> customFieldMapper) {
         return new VaselineCustomFieldMapper(customFieldMapper);
+    }
+
+    public static class VaselineMappingBuilder extends BeanMappingBuilder {
+        private Class<?> sourceClass;
+        private Class<?> destinationClass;
+        private TypeMappingOption[] options;
+
+        public VaselineMappingBuilder(Class<?> sourceClass, Class<?> destinationClass, TypeMappingOption... options) {
+            this.sourceClass = sourceClass;
+            this.destinationClass = destinationClass;
+            this.options = options;
+        }
+
+        @Override
+        protected void configure() {
+            mapping(sourceClass, destinationClass, options);
+        }
     }
 }
