@@ -9,7 +9,7 @@ import java.io.Serializable;
 /**
  * Created by AMV on 2/7/2016.
  */
-public interface CrudService<D extends IBaseDto<Id>, Id extends Serializable>
+public interface CrudDataService<D extends IBaseDto<Id>, Id extends Serializable>
         extends ReadOnlyService<D, Id> {
 
     Id save(D t) throws BaseVaselineClientException;

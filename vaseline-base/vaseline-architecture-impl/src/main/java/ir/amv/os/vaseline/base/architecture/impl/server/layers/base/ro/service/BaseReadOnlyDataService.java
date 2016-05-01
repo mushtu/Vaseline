@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * Created by AMV on 2/8/2016.
  */
-public class BaseReadOnlyService<E extends Identifiable<Id>, D extends IBaseDto<Id>, Id extends Serializable, API extends ReadOnlyDai<E, D, Id>>
+public class BaseReadOnlyDataService<E extends Identifiable<Id>, D extends IBaseDto<Id>, Id extends Serializable, API extends ReadOnlyDai<E, D, Id>>
         extends BaseBusinessService
         implements ReadOnlyService<D, Id> {
 
@@ -26,7 +26,7 @@ public class BaseReadOnlyService<E extends Identifiable<Id>, D extends IBaseDto<
     protected Class<E> entityClass;
     protected Class<D> dtoClass;
 
-    public BaseReadOnlyService() {
+    public BaseReadOnlyDataService() {
         Class<?>[] genericArgumentClasses = ReflectionUtil.getGenericArgumentClasses(getClass());
         if (genericArgumentClasses != null) {
             setEntityClass((Class<E>) genericArgumentClasses[0]);

@@ -12,7 +12,7 @@ import java.io.Serializable;
 /**
  * Created by AMV on 2/8/2016.
  */
-public class BaseCrudService<E extends Identifiable<Id>, D extends IBaseDto<Id>, Id extends Serializable, API extends CrudDai<E, D, Id>>
+public class BaseCrudDataService<E extends Identifiable<Id>, D extends IBaseDto<Id>, Id extends Serializable, API extends CrudDai<E, D, Id>>
         extends BaseReadOnlyService<E, D, Id, API>
         implements CrudService<D, Id> {
 

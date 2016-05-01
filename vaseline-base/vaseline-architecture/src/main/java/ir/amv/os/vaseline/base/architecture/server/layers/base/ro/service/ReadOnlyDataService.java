@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by AMV on 2/7/2016.
  */
-public interface ReadOnlyService<D extends IBaseDto<Id>, Id extends Serializable>
+public interface ReadOnlyDataService<D extends IBaseDto<Id>, Id extends Serializable>
         extends BusinessService {
 
     D getById(Id id) throws BaseVaselineClientException;
